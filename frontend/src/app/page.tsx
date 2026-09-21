@@ -7,6 +7,7 @@ import { RadialRiskGauge } from "@/components/RadialRiskGauge";
 import { ShapDivergentBarChart } from "@/components/ShapDivergentBarChart";
 import { ComplianceViewer } from "@/components/ComplianceViewer";
 import { TelemetryCard } from "@/components/TelemetryCard";
+import { HelpModal } from "@/components/HelpModal";
 import { useFraudAnalysis } from "@/hooks/useFraudAnalysis";
 import { ShieldCheck, AlertCircle, CheckCircle2 } from "lucide-react";
 
@@ -202,6 +203,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Help & User Guide Modal */}
+      <HelpModal />
     </div>
   );
 }
