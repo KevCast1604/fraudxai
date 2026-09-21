@@ -36,7 +36,7 @@ Documento base de requerimientos técnicos, reglas de competencia y arquitectura
 
 * Python, xgboost, shap, scikit-learn, pandas, numpy, joblib.
 * Backend: FastAPI con esquemas Pydantic.
-* LLM: Groq SDK (llama-3.1-8b-instant).
+* LLM: Featherless.ai con plan para modelos Deepseek, Mistral, Qwen, etc.
 * Frontend: Next.js con Tailwind CSS o Streamlit.
 
 ---
@@ -48,3 +48,4 @@ Documento base de requerimientos técnicos, reglas de competencia y arquitectura
 3. Video de demostración de 2 a 5 minutos en YouTube/Vimeo.
 4. Built With completo.
 5. Mínimo 3 capturas de pantalla de la interfaz y métricas.
+6. Todo el código debe de estar en ingles, incluyendo comentarios
