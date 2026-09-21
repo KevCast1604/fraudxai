@@ -47,6 +47,8 @@ async def analyze_transaction(tx: TransactionInput) -> AnalysisResponse:
             regulatory_action=regulatory_action,
             base_value=ml_service.base_value,
             shap_factors=shap_factors,
+            preferred_provider=getattr(tx, "provider", None),
+            preferred_model=getattr(tx, "model", None),
         )
 
         factors_data = [

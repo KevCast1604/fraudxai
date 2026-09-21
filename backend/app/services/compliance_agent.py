@@ -65,6 +65,8 @@ class ComplianceAgent:
         regulatory_action: str,
         base_value: float,
         shap_factors: List[ShapFactor],
+        preferred_provider: Optional[str] = None,
+        preferred_model: Optional[str] = None,
     ) -> Dict[str, Any]:
         start_time = time.perf_counter()
         config = self._get_config()
@@ -80,13 +82,16 @@ class ComplianceAgent:
             shap_factors=shap_factors,
         )
 
-        # Build candidate providers list based on PRIMARY_PROVIDER preference
-        primary = config["primary_provider"]
-        if primary == "groq":
+        # Build candidate providers list based on explicit override or config
+        selected_primary = (preferred_provider or config["primary_provider"]).lower().strip()
+        if selected_primary == "groq":
             provider_order = ["groq", "featherless", "adaption"]
-        elif primary == "adaption":
+        elif selected_primary == "adaption":
             provider_order = ["adaption", "groq", "featherless"]
+        elif selected_primary in ("offline", "deterministic"):
+            provider_order = []
         else:
+            # Default is featherless
             provider_order = ["featherless", "groq", "adaption"]
 
         fallback_reasons: List[str] = []
@@ -101,13 +106,14 @@ class ComplianceAgent:
                 if not key:
                     fallback_reasons.append("GROQ_API_KEY not configured")
                     continue
+                model_to_use = (preferred_model if preferred_provider == "groq" and preferred_model else config["groq_model"])
                 try:
-                    logger.info(f"Invoking Groq Cloud (Model: {config['groq_model']})...")
+                    logger.info(f"Invoking Groq Cloud (Model: {model_to_use})...")
                     timeout = httpx.Timeout(connect=3.0, read=12.0, write=3.0, pool=3.0)
                     content = await self._call_openai_compatible(
                         base_url=config["groq_base_url"],
                         api_key=key,
-                        model=config["groq_model"],
+                        model=model_to_use,
                         system_prompt=SYSTEM_COMPLIANCE_PROMPT,
                         user_prompt=user_prompt,
                         timeout=timeout,
@@ -117,14 +123,14 @@ class ComplianceAgent:
                         "memo": content,
                         "telemetry": AuditTelemetry(
                             provider="groq",
-                            model=config["groq_model"],
+                            model=model_to_use,
                             latency_ms=latency_ms,
                             fallback_triggered=is_fallback,
                             fallback_reason="; ".join(fallback_reasons) if is_fallback else None,
                         ),
                     }
                 except Exception as exc:
-                    err = f"Groq ({config['groq_model']}) failed: {str(exc)}"
+                    err = f"Groq ({model_to_use}) failed: {str(exc)}"
                     logger.warning(err)
                     fallback_reasons.append(err)
 
@@ -133,13 +139,14 @@ class ComplianceAgent:
                 if not key:
                     fallback_reasons.append("FEATHERLESS_API_KEY not configured")
                     continue
+                model_to_use = (preferred_model if preferred_provider == "featherless" and preferred_model else config["featherless_model"])
                 try:
-                    logger.info(f"Invoking Featherless.ai (Model: {config['featherless_model']})...")
+                    logger.info(f"Invoking Featherless.ai (Model: {model_to_use})...")
                     timeout = httpx.Timeout(connect=5.0, read=config["timeout_primary"], write=5.0, pool=5.0)
                     content = await self._call_openai_compatible(
                         base_url=config["featherless_base_url"],
                         api_key=key,
-                        model=config["featherless_model"],
+                        model=model_to_use,
                         system_prompt=SYSTEM_COMPLIANCE_PROMPT,
                         user_prompt=user_prompt,
                         timeout=timeout,
@@ -149,7 +156,7 @@ class ComplianceAgent:
                         "memo": content,
                         "telemetry": AuditTelemetry(
                             provider="featherless.ai",
-                            model=config["featherless_model"],
+                            model=model_to_use,
                             latency_ms=latency_ms,
                             fallback_triggered=is_fallback,
                             fallback_reason="; ".join(fallback_reasons) if is_fallback else None,

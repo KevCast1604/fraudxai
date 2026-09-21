@@ -17,6 +17,8 @@ class TransactionInput(BaseModel):
     used_chip: int = Field(..., ge=0, le=1, description="1 if physical EMV chip validated, 0 otherwise", example=0)
     used_pin: int = Field(..., ge=0, le=1, description="1 if security PIN entered, 0 otherwise", example=0)
     online_order: int = Field(..., ge=0, le=1, description="1 if Card-Not-Present (e-commerce), 0 if physical POS", example=0)
+    provider: Optional[str] = Field("featherless", description="Target LLM provider: featherless, groq, or offline")
+    model: Optional[str] = Field(None, description="Optional custom model override")
 
 
 class ShapFactor(BaseModel):
