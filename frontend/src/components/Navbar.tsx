@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, Cpu, Scale, Activity } from "lucide-react";
+import { ShieldCheck, Cpu, Scale, Activity, ExternalLink } from "lucide-react";
 
 export const Navbar: React.FC = () => {
   return (
@@ -47,6 +47,18 @@ export const Navbar: React.FC = () => {
             <Activity className="w-3.5 h-3.5" />
             <span className="font-semibold">GIBC-V2</span>
           </div>
+
+          <a
+            href="https://my-app-1ombyk.adaptionlabs.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-[11px] font-semibold hover:bg-indigo-100 dark:hover:bg-indigo-900/60 transition-colors shadow-xs"
+            title="Open Adaption Labs Ops Portal"
+          >
+            <ExternalLink className="w-3.5 h-3.5 text-indigo-500" />
+            <span className="hidden sm:inline">Adaption Labs Portal</span>
+            <span className="text-[10px] px-1 py-0.2 rounded bg-indigo-200/60 dark:bg-indigo-800/80 font-mono">10/10</span>
+          </a>
         </div>
       </div>
     </header>

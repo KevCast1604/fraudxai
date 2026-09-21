@@ -146,6 +146,17 @@ export const HelpModal: React.FC = () => {
                   <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
                     The audit telemetry bar displays the active provider (<strong>Groq</strong> for ultra-fast &lt;3s inference, <strong>Featherless.ai</strong>, <strong>Adaption Labs</strong>, or <strong>Deterministic Offline Engine</strong>) with automatic failover to guarantee zero downtime.
                   </p>
+                  <div className="pt-1">
+                    <a
+                      href="https://my-app-1ombyk.adaptionlabs.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+                    >
+                      <span>Open Adaption Labs Ops Portal (Score 10/10)</span>
+                      <span>↗</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
