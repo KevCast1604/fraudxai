@@ -1,3 +1,16 @@
+export type LLMProvider = "featherless" | "groq" | "offline";
+
+export interface LLMConfig {
+  provider: LLMProvider;
+  model: string;
+  name: string;
+  description: string;
+  badge: string;
+  badgeColor: string;
+  speed: string;
+  isDefault?: boolean;
+}
+
 export interface TransactionFeatures {
   amount: number;
   distance_from_home: number;
@@ -7,6 +20,8 @@ export interface TransactionFeatures {
   used_chip: number;
   used_pin: number;
   online_order: number;
+  provider?: string;
+  model?: string;
 }
 
 export interface ShapFactor {

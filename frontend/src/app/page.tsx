@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { SimulationPanel } from "@/components/SimulationPanel";
 import { RadialRiskGauge } from "@/components/RadialRiskGauge";
@@ -8,13 +8,19 @@ import { ShapDivergentBarChart } from "@/components/ShapDivergentBarChart";
 import { ComplianceViewer } from "@/components/ComplianceViewer";
 import { TelemetryCard } from "@/components/TelemetryCard";
 import { HelpModal } from "@/components/HelpModal";
+import { ProviderSidebar } from "@/components/ProviderSidebar";
 import { useFraudAnalysis } from "@/hooks/useFraudAnalysis";
-import { ShieldCheck, AlertCircle, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, AlertCircle, CheckCircle2, Cpu, RefreshCw } from "lucide-react";
 
 export default function Home() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
   const {
     features,
     selectedPresetId,
+    selectedProvider,
+    setSelectedProvider,
+    setSelectedModel,
     isAnalyzing,
     result,
     error,
@@ -102,19 +108,54 @@ export default function Home() {
             isAnalyzing={isAnalyzing}
             onApplyPreset={applyPreset}
             onUpdateFeature={updateFeature}
-            onAnalyze={runAnalysis}
+            onAnalyze={() => runAnalysis()}
             onReset={resetFeatures}
           />
         </section>
 
+        {/* Active Analysis Loading Indicator Banner */}
+        {isAnalyzing && (
+          <section className="print:hidden">
+            <div className="p-4 rounded-2xl border-2 border-cyan-500/40 bg-cyan-500/10 dark:bg-cyan-950/40 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+              <div className="flex items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-600 dark:text-cyan-400 shrink-0">
+                  <RefreshCw className="w-5 h-5 animate-spin" />
+                </div>
+                <div>
+                  <div className="text-xs sm:text-sm font-bold text-zinc-950 dark:text-zinc-50 font-mono flex items-center gap-2">
+                    <span>Audit Pipeline Running</span>
+                    <span className="inline-block w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
+                  </div>
+                  <p className="text-[11px] text-zinc-600 dark:text-zinc-400 font-sans mt-0.5">
+                    Decomposing local SHAP attributions and drafting statutory compliance memorandum via{" "}
+                    <strong className="text-cyan-600 dark:text-cyan-400 font-mono">
+                      {selectedProvider === "groq"
+                        ? "Groq Cloud LPU (~2s)"
+                        : selectedProvider === "offline"
+                        ? "Deterministic Safety Net (<5ms)"
+                        : "Featherless.ai (~20s)"}
+                    </strong>
+                    ...
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 font-mono text-[10px] text-cyan-700 dark:text-cyan-300 bg-cyan-500/20 px-3 py-1.5 rounded-lg border border-cyan-500/30 font-bold uppercase tracking-wider shrink-0">
+                In-Flight Processing
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* 2. Real-Time Explainability Quadrant (Instrument Dial + Feature Attribution) */}
         {result && (
-          <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 print:hidden">
-            {/* Left Column: Radial Risk Gauge and Decision Plaque */}
-            <div className="lg:col-span-5 flex flex-col gap-6">
-              <div className="flex-1">
-                <RadialRiskGauge score={result.risk_score} />
-              </div>
+          <div className={isAnalyzing ? "opacity-50 pointer-events-none transition-opacity duration-300 space-y-8" : "transition-opacity duration-300 space-y-8"}>
+            <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 print:hidden">
+              {/* Left Column: Radial Risk Gauge and Decision Plaque */}
+              <div className="lg:col-span-5 flex flex-col gap-6">
+                <div className="flex-1">
+                  <RadialRiskGauge score={result.risk_score} />
+                </div>
 
               {/* Official Decision & Case Info Plaque */}
               <div className="p-5 rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl flex flex-col justify-between text-xs">
@@ -145,46 +186,58 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <div className="flex justify-between items-center p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-100 dark:border-zinc-800/60">
-                    <span className="text-zinc-400 text-[10px] uppercase font-bold tracking-wider">GOVERNANCE BASIS:</span>
-                    <span className="text-zinc-700 dark:text-zinc-300 font-medium text-[11px]">
-                      CFPB Circular 2023-03 & GDPR Art. 22
-                    </span>
+                    <div className="flex justify-between items-center p-2.5 rounded-lg bg-zinc-50 dark:bg-zinc-950/40 border border-zinc-100 dark:border-zinc-800/60">
+                      <span className="text-zinc-400 text-[10px] uppercase font-bold tracking-wider">GOVERNANCE BASIS:</span>
+                      <span className="text-zinc-700 dark:text-zinc-300 font-medium text-[11px]">
+                        CFPB Circular 2023-03 & GDPR Art. 22
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Right Column: SHAP Local Attribution Waterfall Matrix */}
-            <div className="lg:col-span-7 flex flex-col">
-              <ShapDivergentBarChart
-                factors={result.shap_factors}
-                baseValue={result.base_value}
+              {/* Right Column: SHAP Local Attribution Waterfall Matrix */}
+              <div className="lg:col-span-7 flex flex-col">
+                <ShapDivergentBarChart
+                  factors={result.shap_factors}
+                  baseValue={result.base_value}
+                />
+              </div>
+            </section>
+
+            {/* 3. System & Evaluation Telemetry */}
+            <section className="print:hidden">
+              <TelemetryCard
+                telemetry={result.telemetry}
+                onOpenSettings={() => setIsSidebarOpen(true)}
               />
-            </div>
-          </section>
-        )}
+            </section>
 
-        {/* 3. System & Evaluation Telemetry */}
-        {result && (
-          <section className="print:hidden">
-            <TelemetryCard telemetry={result.telemetry} />
-          </section>
-        )}
-
-        {/* 4. Official Compliance Memorandum & Export */}
-        {result && (
-          <section>
-            <ComplianceViewer
-              memoMarkdown={result.compliance_memo}
-              auditId={result.audit_id}
-              timestamp={result.timestamp}
-              riskScore={result.risk_score}
-              riskTier={result.risk_tier}
-            />
-          </section>
+            {/* 4. Official Compliance Memorandum & Export */}
+            <section>
+              <ComplianceViewer
+                memoMarkdown={result.compliance_memo}
+                auditId={result.audit_id}
+                timestamp={result.timestamp}
+                riskScore={result.risk_score}
+                riskTier={result.risk_tier}
+              />
+            </section>
+          </div>
         )}
       </main>
+
+      {/* Floating Engine Hub Trigger Tab (Right Edge of Screen) */}
+      <button
+        onClick={() => setIsSidebarOpen(true)}
+        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-white/95 dark:bg-zinc-900/95 border-l-2 border-y border-cyan-500 hover:border-cyan-400 text-zinc-700 dark:text-zinc-200 hover:text-cyan-600 dark:hover:text-cyan-400 px-2 py-3.5 rounded-l-xl shadow-2xl flex flex-col items-center gap-2 cursor-pointer group print:hidden transition-all backdrop-blur-md"
+        title="Open AI Provider & Inference Engine Settings"
+      >
+        <Cpu className="w-4 h-4 text-cyan-500 group-hover:scale-125 transition-transform" />
+        <span className="[writing-mode:vertical-rl] text-[9px] font-mono font-bold tracking-widest uppercase rotate-180 text-zinc-500 dark:text-zinc-400 group-hover:text-cyan-500">
+          Engine Hub
+        </span>
+      </button>
 
       {/* Cockpit Footer */}
       <footer className="border-t border-zinc-200/80 dark:border-zinc-800/80 py-8 mt-12 bg-white/70 dark:bg-zinc-950/80 backdrop-blur-md text-xs text-zinc-400 print:hidden transition-colors">
@@ -203,6 +256,22 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Slide-out Provider & Engine Hub Sidebar */}
+      <ProviderSidebar
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        currentProvider={selectedProvider}
+        onSelectProvider={(prov, model) => {
+          setSelectedProvider(prov);
+          if (model) setSelectedModel(model);
+        }}
+        telemetry={result?.telemetry}
+        isAnalyzing={isAnalyzing}
+        onReanalyze={(provOverride) =>
+          runAnalysis(typeof provOverride === "string" ? provOverride : undefined)
+        }
+      />
 
       {/* Floating Help & User Guide Modal */}
       <HelpModal />

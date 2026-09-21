@@ -8,6 +8,8 @@ const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:800
 export function useFraudAnalysis() {
   const [features, setFeatures] = useState<TransactionFeatures>(PRESET_SCENARIOS[0].features);
   const [selectedPresetId, setSelectedPresetId] = useState<string>(PRESET_SCENARIOS[0].id);
+  const [selectedProvider, setSelectedProvider] = useState<string>("featherless");
+  const [selectedModel, setSelectedModel] = useState<string>("Qwen/Qwen2.5-7B-Instruct");
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
   const [result, setResult] = useState<AnalysisResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -26,9 +28,26 @@ export function useFraudAnalysis() {
     applyPreset(PRESET_SCENARIOS[0]);
   }, [applyPreset]);
 
-  const runAnalysis = useCallback(async () => {
+  const runAnalysis = useCallback(async (providerOverride?: string, modelOverride?: string) => {
     setIsAnalyzing(true);
     setError(null);
+
+    // Strictly ensure providerOverride is a string (never a DOM/React SyntheticEvent)
+    const validProvider =
+      typeof providerOverride === "string" && providerOverride.trim().length > 0
+        ? providerOverride.trim()
+        : selectedProvider;
+
+    const validModel =
+      typeof modelOverride === "string" && modelOverride.trim().length > 0
+        ? modelOverride.trim()
+        : selectedModel;
+
+    const payload = {
+      ...features,
+      provider: validProvider,
+      model: validModel || undefined,
+    };
 
     try {
       const res = await fetch(`${BACKEND_URL}/api/v1/analyze`, {
@@ -36,7 +55,7 @@ export function useFraudAnalysis() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(features),
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) {
@@ -53,7 +72,7 @@ export function useFraudAnalysis() {
     } finally {
       setIsAnalyzing(false);
     }
-  }, [features]);
+  }, [features, selectedProvider, selectedModel]);
 
   // Run initial analysis automatically on mount
   useEffect(() => {
@@ -64,6 +83,10 @@ export function useFraudAnalysis() {
   return {
     features,
     selectedPresetId,
+    selectedProvider,
+    setSelectedProvider,
+    selectedModel,
+    setSelectedModel,
     isAnalyzing,
     result,
     error,

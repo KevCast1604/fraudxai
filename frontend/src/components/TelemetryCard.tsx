@@ -1,17 +1,18 @@
 "use client";
 
 import React from "react";
-import { Activity, CheckCircle2, AlertTriangle, Zap, Server } from "lucide-react";
+import { Activity, CheckCircle2, AlertTriangle, Zap, Server, Settings2 } from "lucide-react";
 import { AuditTelemetry } from "@/types";
 
 interface TelemetryCardProps {
   telemetry: AuditTelemetry;
+  onOpenSettings?: () => void;
 }
 
-export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry }) => {
+export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenSettings }) => {
   return (
     <div className="rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-5 shadow-xl print:hidden">
-      <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800/80">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800/80 gap-2">
         <div className="flex items-center gap-2.5">
           <div className="w-6 h-6 rounded-md bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
             <Activity className="w-3.5 h-3.5 text-emerald-500" />
@@ -21,18 +22,44 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry }) => {
           </h3>
         </div>
 
-        <div className="flex items-center gap-2 text-[10px] font-sans text-zinc-400">
-          <Server className="w-3 h-3 text-cyan-500" />
-          <span className="font-semibold text-zinc-600 dark:text-zinc-300">High-Availability Resilient Cluster</span>
+        <div className="flex items-center gap-2.5">
+          <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-sans text-zinc-400">
+            <Server className="w-3 h-3 text-cyan-500" />
+            <span className="font-semibold text-zinc-600 dark:text-zinc-300">Cluster Nominal</span>
+          </div>
+
+          {onOpenSettings && (
+            <button
+              onClick={onOpenSettings}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 text-[11px] font-mono font-bold transition-all cursor-pointer shadow-2xs"
+              title="Open AI Provider selection sidebar"
+            >
+              <Settings2 className="w-3.5 h-3.5 text-cyan-500" />
+              <span>Change Provider / Settings</span>
+            </button>
+          )}
         </div>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
         {/* Active Provider */}
-        <div className="p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40">
-          <span className="text-[10px] text-zinc-400 font-sans uppercase tracking-wider block">
-            AI Provider
-          </span>
+        <div
+          onClick={onOpenSettings}
+          className={`p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40 ${
+            onOpenSettings ? "cursor-pointer hover:border-cyan-500/40 transition-colors group" : ""
+          }`}
+          title={onOpenSettings ? "Click to change provider" : undefined}
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-zinc-400 font-sans uppercase tracking-wider block">
+              AI Provider
+            </span>
+            {onOpenSettings && (
+              <span className="text-[9px] font-mono text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                Edit ↗
+              </span>
+            )}
+          </div>
           <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100 font-mono mt-1 inline-flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
             {telemetry.provider}

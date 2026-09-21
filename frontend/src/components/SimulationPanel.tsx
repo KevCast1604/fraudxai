@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Play, Sparkles, SlidersHorizontal, RotateCcw, CheckCircle2 } from "lucide-react";
+import { Play, Sparkles, SlidersHorizontal, RotateCcw, CheckCircle2, RefreshCw } from "lucide-react";
 import { TransactionFeatures, PRESET_SCENARIOS, PresetScenario } from "@/types";
 
 interface SimulationPanelProps {
@@ -411,20 +411,33 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
         {/* CTA Trigger Bar */}
         <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-[11px] font-sans text-zinc-500 dark:text-zinc-400">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-            <span>Ready to evaluate transaction risk and draft the explanation report.</span>
+            {isAnalyzing ? (
+              <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-medium">
+                <span className="w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
+                <span>Running XGBoost + SHAP TreeExplainer & drafting legal compliance memo...</span>
+              </div>
+            ) : (
+              <>
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                <span>Ready to evaluate transaction risk and draft the explanation report.</span>
+              </>
+            )}
           </div>
 
           <button
             type="button"
             onClick={onAnalyze}
             disabled={isAnalyzing}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-950 font-sans font-bold text-xs shadow-lg shadow-zinc-950/10 dark:shadow-cyan-950/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none cursor-pointer border border-zinc-800 dark:border-zinc-200"
+            className={`w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-2.5 rounded-xl font-sans font-bold text-xs shadow-lg transition-all cursor-pointer border ${
+              isAnalyzing
+                ? "bg-gradient-to-r from-cyan-600 via-indigo-600 to-cyan-600 text-white border-cyan-400/50 animate-pulse shadow-cyan-500/20"
+                : "bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-950 shadow-zinc-950/10 dark:shadow-cyan-950/20 hover:scale-[1.02] active:scale-[0.98] border-zinc-800 dark:border-zinc-200"
+            }`}
           >
             {isAnalyzing ? (
               <>
-                <div className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                <span>Evaluating risk factors and writing report...</span>
+                <RefreshCw className="w-4 h-4 animate-spin text-white" />
+                <span>Evaluating Risk & Drafting Memo...</span>
               </>
             ) : (
               <>
