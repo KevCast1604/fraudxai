@@ -1,4 +1,4 @@
-﻿# Contexto y Especificación de Proyecto: FraudxAI
+# Contexto y Especificación de Proyecto: FraudxAI
 
 Documento base de requerimientos técnicos, reglas de competencia y arquitectura de software para el agente de desarrollo.
 
@@ -48,4 +48,4 @@ Documento base de requerimientos técnicos, reglas de competencia y arquitectura
 3. Video de demostración de 2 a 5 minutos en YouTube/Vimeo.
 4. Built With completo.
 5. Mínimo 3 capturas de pantalla de la interfaz y métricas.
-6. Todo el código debe de estar en ingles, incluyendo comentarios
+6. Todo el código debe de estar en ingles, incluyendo comentarios.
