@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Printer, Download, Copy, Check, FileCheck2, ShieldAlert, Award } from "lucide-react";
+import { Printer, Copy, Check, FileCheck2, ShieldAlert, Award, Maximize2, Minimize2 } from "lucide-react";
 
 interface ComplianceViewerProps {
   memoMarkdown: string;
@@ -62,6 +62,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
   riskTier,
 }) => {
   const [copied, setCopied] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Clean formatted markdown without raw code variable names
   const readableMarkdown = useMemo(() => {
@@ -74,16 +75,6 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
 
   const handlePrint = () => {
     window.print();
-  };
-
-  const handleDownloadMarkdown = () => {
-    const blob = new Blob([readableMarkdown], { type: "text/markdown;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `compliance_report_${auditId}.md`;
-    link.click();
-    URL.revokeObjectURL(url);
   };
 
   const handleCopy = async () => {
@@ -107,8 +98,8 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
 
   return (
     <div className="w-full rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transition-all">
-      {/* Top Action Bar: Hidden during Print */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 border-b border-zinc-100 dark:border-zinc-800/80 gap-4 print:hidden bg-zinc-50/50 dark:bg-zinc-950/40">
+      {/* Top Action Bar: Sticky during scroll, hidden during print */}
+      <div className="sticky top-0 z-20 flex flex-col sm:flex-row sm:items-center justify-between p-5 border-b border-zinc-100 dark:border-zinc-800/80 gap-4 print:hidden bg-zinc-50/95 dark:bg-zinc-950/90 backdrop-blur-md shadow-xs">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-zinc-900 dark:bg-zinc-800 flex items-center justify-center border border-zinc-700/60">
             <FileCheck2 className="w-4 h-4 text-cyan-400" />
@@ -118,9 +109,6 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
               <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono">
                 Official Regulatory Compliance & Fraud Assessment Report
               </h2>
-              <span className="text-[10px] px-2 py-0.5 rounded font-sans bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold">
-                Compliance Audit Record
-              </span>
             </div>
             <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
               Automated audit record complying with consumer fair lending and banking transparency directives (CFPB, GDPR, and Fed SR 26-2).
@@ -128,7 +116,27 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Toggle Expand / Compact View */}
+          <button
+            type="button"
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700/70 transition-all cursor-pointer shadow-2xs"
+            title={isExpanded ? "Switch to compact scrollable docket view" : "Expand to full document length"}
+          >
+            {isExpanded ? (
+              <>
+                <Minimize2 className="w-3.5 h-3.5 text-cyan-500" />
+                <span>Compact View</span>
+              </>
+            ) : (
+              <>
+                <Maximize2 className="w-3.5 h-3.5 text-cyan-500" />
+                <span>Expand View</span>
+              </>
+            )}
+          </button>
+
           {/* Copy Button */}
           <button
             type="button"
@@ -137,16 +145,6 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
           >
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copied ? "Copied" : "Copy"}</span>
-          </button>
-
-          {/* Download Markdown */}
-          <button
-            type="button"
-            onClick={handleDownloadMarkdown}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700/70 transition-all cursor-pointer shadow-2xs"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>Download .MD</span>
           </button>
 
           {/* Print / PDF Button */}
@@ -160,6 +158,13 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Scrollable Container with Custom Viewport Height */}
+      <div
+        className={`transition-all duration-300 ${
+          isExpanded ? "max-h-none" : "max-h-[560px] overflow-y-auto"
+        } print:max-h-none print:overflow-visible`}
+      >
 
       {/* Official Audit Document Paper Layout */}
       <article
@@ -277,18 +282,27 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
               Model: XGBoost-Fraud-v1.0 (ROC-AUC: 0.9445) • Explainability: Mathematical SHAP decomposition
             </p>
           </div>
-
-          <div className="flex flex-col justify-end text-left sm:text-right">
-            <div className="border-b border-zinc-400 dark:border-zinc-600 print:border-black w-56 sm:ml-auto mb-1.5" />
-            <p className="text-zinc-700 dark:text-zinc-300 print:text-black font-sans text-[11px] font-semibold">
-              Authorized Financial Crime & Compliance Officer
-            </p>
-            <p className="text-zinc-400 text-[10px] font-mono">
-              Audit Tracking Record: {auditId}
-            </p>
-          </div>
         </footer>
       </article>
+      </div>
+
+      {/* Compact View Footer Bar */}
+      {!isExpanded && (
+        <div className="p-3 border-t border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/70 dark:bg-zinc-950/60 flex items-center justify-between text-[11px] font-sans text-zinc-400 print:hidden px-6">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+            <span>Document docket viewing in compact mode (Scroll inside to review full memorandum).</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsExpanded(true)}
+            className="text-cyan-600 dark:text-cyan-400 hover:underline font-semibold font-mono text-[10px] flex items-center gap-1 cursor-pointer"
+          >
+            <span>Expand Full Document</span>
+            <Maximize2 className="w-3 h-3" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
