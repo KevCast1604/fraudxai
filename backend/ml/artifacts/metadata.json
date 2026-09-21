@@ -1,0 +1,26 @@
+{
+  "model_version": "XGBoost-Fraud-v1.0",
+  "feature_columns": [
+    "amount",
+    "distance_from_home",
+    "distance_from_last_tx",
+    "ratio_to_median_price",
+    "repeat_retailer",
+    "used_chip",
+    "used_pin",
+    "online_order"
+  ],
+  "base_value": 0.0,
+  "thresholds": {
+    "low_max": 0.35,
+    "medium_max": 0.7,
+    "critical_min": 0.7
+  },
+  "metrics": {
+    "roc_auc": 0.9445,
+    "pr_auc": 0.5241,
+    "fraud_recall": 0.861,
+    "fraud_precision": 0.1475,
+    "test_samples": 30000
+  }
+}
