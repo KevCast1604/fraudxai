@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { HelpCircle, X, Sliders, Activity, FileCheck, Server, Sparkles } from "lucide-react";
+import { HelpCircle, X, Sliders, Activity, FileCheck, Server, Sparkles, GitCompare } from "lucide-react";
 
 export const HelpModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -116,32 +116,64 @@ export const HelpModal: React.FC = () => {
                 </div>
               </div>
 
-              {/* Step 3: Legal Compliance Memo */}
+              {/* Step 3: Actionable Recourse & What-If Engine */}
+              <div className="flex gap-4">
+                <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                  <GitCompare className="w-5 h-5" />
+                </div>
+                <div className="space-y-1.5">
+                  <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                    <span>3. Actionable Recourse & What-If Engine (Right to Recourse)</span>
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                      Step 3
+                    </span>
+                  </h4>
+                  <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+                    Directly addresses banking regulatory mandates under <strong>CFPB Reg B (§ 1002.9)</strong> and <strong>EU GDPR Article 22(3)</strong>: resolving <em>&ldquo;What exact, minimal modifications would turn this adverse block into an approval?&rdquo;</em>
+                  </p>
+                  <ul className="text-xs space-y-1 text-zinc-500 dark:text-zinc-400 list-disc list-inside">
+                    <li>
+                      <strong>Actionable Levers:</strong> Calculates minimal interventions (e.g. <em>EMV Chip & PIN insertion</em>, <em>Merchant Whitelisting</em>, or <em>Transit Velocity &lt;15 km</em>).
+                    </li>
+                    <li>
+                      <strong>Live Risk Reduction Delta:</strong> Quantifies simulated drops (e.g., from <strong>89% to 22% Auto-Approved</strong>).
+                    </li>
+                    <li>
+                      <strong>1-Click Workbench Patching:</strong> Click <strong>&ldquo;Apply What-If Intervention&rdquo;</strong> to instantly simulate the counterfactual parameters and observe the decision change live.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Step 4: Legal Compliance Memo */}
               <div className="flex gap-4">
                 <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                   <FileCheck className="w-5 h-5" />
                 </div>
                 <div className="space-y-1.5">
                   <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                    <span>3. Statutory Regulatory Memo & PDF Export</span>
+                    <span>4. Statutory Regulatory Memo & PDF Export</span>
                     <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
-                      Step 3
+                      Step 4
                     </span>
                   </h4>
                   <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
-                    The AI synthesizes the mathematical proof into an auditable document complying with <strong>CFPB Circular 2023-03 (adverse reasons)</strong>, <strong>FinCEN SAR (5 W&apos;s)</strong>, and <strong>GDPR Article 22 (human contestation)</strong>. Click <strong>&quot;Export PDF / Print&quot;</strong> to generate a clean, vector document ready for legal archiving.
+                    The AI synthesizes the mathematical proof and actionable recourse pathways into an auditable document complying with <strong>CFPB Circular 2023-03 (adverse reasons)</strong>, <strong>FinCEN SAR (5 W&apos;s)</strong>, and <strong>GDPR Article 22(3) (Right to Recourse)</strong>. Click <strong>&quot;Export PDF / Print&quot;</strong> to generate a clean, vector document ready for legal archiving.
                   </p>
                 </div>
               </div>
 
-              {/* Step 4: Multi-Provider Failover */}
+              {/* Step 5: Multi-Provider Failover */}
               <div className="flex gap-4">
                 <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 flex items-center justify-center shrink-0">
                   <Server className="w-5 h-5" />
                 </div>
                 <div className="space-y-1.5">
                   <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                    <span>4. High-Availability Multi-Provider Telemetry</span>
+                    <span>5. High-Availability Multi-Provider Telemetry</span>
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
+                      Step 5
+                    </span>
                   </h4>
                   <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
                     The audit telemetry bar displays the active provider (<strong>Groq</strong> for ultra-fast &lt;3s inference, <strong>Featherless.ai</strong>, <strong>Adaption Labs</strong>, or <strong>Deterministic Offline Engine</strong>) with automatic failover to guarantee zero downtime.

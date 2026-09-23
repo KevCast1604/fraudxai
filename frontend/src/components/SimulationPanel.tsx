@@ -24,7 +24,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
   onReset,
 }) => {
   return (
-    <div className="relative rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl overflow-hidden transition-all h-full flex flex-col justify-between">
+    <div className="relative rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl overflow-hidden transition-all flex flex-col">
       {/* Clean hairline top border */}
       <div className="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800" />
 

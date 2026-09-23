@@ -9,6 +9,7 @@ import { ComplianceViewer } from "@/components/ComplianceViewer";
 import { TelemetryCard } from "@/components/TelemetryCard";
 import { HelpModal } from "@/components/HelpModal";
 import { ProviderSidebar } from "@/components/ProviderSidebar";
+import { ActionableRecourseCard } from "@/components/ActionableRecourseCard";
 import { useFraudAnalysis } from "@/hooks/useFraudAnalysis";
 import { ShieldCheck, AlertCircle, CheckCircle2, Cpu, RefreshCw } from "lucide-react";
 
@@ -26,6 +27,7 @@ export default function Home() {
     error,
     applyPreset,
     updateFeature,
+    applyRecoursePatch,
     resetFeatures,
     runAnalysis,
   } = useFraudAnalysis();
@@ -101,9 +103,9 @@ export default function Home() {
         )}
 
         {/* Core Split-Cockpit Grid: Simulator (Left) and Instant Diagnostic (Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Left Column: 1. Transaction Simulation Workbench */}
-          <div className="lg:col-span-6 flex flex-col print:hidden">
+          <div className="lg:col-span-6 flex flex-col print:hidden lg:sticky lg:top-6">
             <SimulationPanel
               features={features}
               selectedPresetId={selectedPresetId}
@@ -198,11 +200,22 @@ export default function Home() {
                   </div>
                 </section>
 
-                {/* SHAP Local Attribution Waterfall Matrix taking remaining height */}
-                <section className="flex-1 min-h-0 flex flex-col print:hidden">
+                {/* SHAP Local Attribution Waterfall Matrix */}
+                <section className="min-h-0 flex flex-col print:hidden">
                   <ShapDivergentBarChart
                     factors={result.shap_factors}
                     baseValue={result.base_value}
+                  />
+                </section>
+
+                {/* Actionable Counterfactual Recourse (What-If Engine) */}
+                <section className="print:hidden">
+                  <ActionableRecourseCard
+                    currentRiskScore={result.risk_score}
+                    currentRiskTier={result.risk_tier}
+                    recourses={result.actionable_recourse || []}
+                    isAnalyzing={isAnalyzing}
+                    onApplyRecourse={applyRecoursePatch}
                   />
                 </section>
               </div>
