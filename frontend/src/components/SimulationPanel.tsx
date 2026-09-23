@@ -25,21 +25,21 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
 }) => {
   return (
     <div className="relative rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl overflow-hidden transition-all h-full flex flex-col justify-between">
-      {/* Decorative hairline accent top border */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-rose-500" />
+      {/* Clean hairline top border */}
+      <div className="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800" />
 
       {/* Control Panel Header */}
       <div className="px-4 sm:px-5 py-3 border-b border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center border border-zinc-200 dark:border-zinc-700">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+            <SlidersHorizontal className="w-3.5 h-3.5 text-zinc-700 dark:text-zinc-300" />
           </div>
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono">
                 Transaction Simulator & Risk Assessment
               </h2>
-              <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20 font-semibold">
+              <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 font-semibold">
                 LIVE
               </span>
             </div>
@@ -65,7 +65,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
         <div>
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold text-cyan-600 dark:text-cyan-400 tracking-wider">
+              <span className="text-[10px] font-mono font-bold text-zinc-400 tracking-wider">
                 [01]
               </span>
               <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono flex items-center gap-1.5">
@@ -98,18 +98,18 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                   title={`${preset.name}: ${preset.description}`}
                   className={`group relative text-left p-2.5 rounded-xl border transition-all flex flex-col justify-between cursor-pointer ${
                     isSelected
-                      ? "border-cyan-500/80 dark:border-cyan-400/80 bg-cyan-50/40 dark:bg-cyan-950/20 shadow-md ring-1 ring-cyan-500/30"
+                      ? "border-zinc-900 dark:border-zinc-100 bg-zinc-100/90 dark:bg-zinc-800/80 shadow-sm ring-1 ring-zinc-900/10 dark:ring-zinc-100/10"
                       : "border-zinc-200 dark:border-zinc-800/90 bg-zinc-50/60 dark:bg-zinc-950/40 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-100/60 dark:hover:bg-zinc-900/60"
                   }`}
                 >
                   <div>
                     {/* Top Row: Name + Indicator */}
                     <div className="flex items-start justify-between gap-1.5 mb-1">
-                      <span className="font-semibold text-xs text-zinc-900 dark:text-zinc-100 group-hover:text-cyan-700 dark:group-hover:text-cyan-300 transition-colors">
+                      <span className="font-semibold text-xs text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
                         {preset.name}
                       </span>
                       {isSelected && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-xs shadow-cyan-500 shrink-0 mt-1" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 dark:bg-zinc-100 shadow-xs shrink-0 mt-1" />
                       )}
                     </div>
 
@@ -146,7 +146,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
         <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/80">
           <div className="flex items-center justify-between mb-2.5">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold text-cyan-600 dark:text-cyan-400 tracking-wider">
+              <span className="text-[10px] font-mono font-bold text-zinc-400 tracking-wider">
                 [02]
               </span>
               <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono">
@@ -163,7 +163,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
             <div className="p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/40 dark:bg-zinc-950/30 space-y-2">
               <div className="flex justify-between items-center">
                 <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500" />
                   Transaction Amount
                 </label>
                 <span className="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-50 shadow-2xs">
@@ -177,7 +177,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                 step="5"
                 value={features.amount}
                 onChange={(e) => onUpdateFeature("amount", parseFloat(e.target.value))}
-                className="w-full accent-cyan-500 cursor-pointer h-1.5"
+                className="w-full accent-zinc-900 dark:accent-zinc-100 cursor-pointer h-1.5"
               />
               <div className="grid grid-cols-3 text-[10px] font-sans text-zinc-400 dark:text-zinc-500 pt-0.5">
                 <span className="text-left">$1 Small</span>
@@ -190,7 +190,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
             <div className="p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/40 dark:bg-zinc-950/30 space-y-2">
               <div className="flex justify-between items-center">
                 <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500" />
                   Spending vs. Customer 90-Day Habitual Average
                 </label>
                 <span className="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-50 shadow-2xs">
@@ -204,7 +204,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                 step="0.1"
                 value={features.ratio_to_median_price}
                 onChange={(e) => onUpdateFeature("ratio_to_median_price", parseFloat(e.target.value))}
-                className="w-full accent-cyan-500 cursor-pointer h-1.5"
+                className="w-full accent-zinc-900 dark:accent-zinc-100 cursor-pointer h-1.5"
               />
               <div className="grid grid-cols-3 text-[10px] font-sans text-zinc-400 dark:text-zinc-500 pt-0.5">
                 <span className="text-left">0.1x (Typical)</span>
@@ -217,7 +217,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
             <div className="p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/40 dark:bg-zinc-950/30 space-y-2">
               <div className="flex justify-between items-center">
                 <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500" />
                   Distance from Customer Home
                 </label>
                 <span className="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-50 shadow-2xs">
@@ -231,7 +231,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                 step="5"
                 value={features.distance_from_home}
                 onChange={(e) => onUpdateFeature("distance_from_home", parseFloat(e.target.value))}
-                className="w-full accent-cyan-500 cursor-pointer h-1.5"
+                className="w-full accent-zinc-900 dark:accent-zinc-100 cursor-pointer h-1.5"
               />
               <div className="grid grid-cols-3 text-[10px] font-sans text-zinc-400 dark:text-zinc-500 pt-0.5">
                 <span className="text-left">0 km (Local)</span>
@@ -244,7 +244,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
             <div className="p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/40 dark:bg-zinc-950/30 space-y-2">
               <div className="flex justify-between items-center">
                 <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500" />
                   Distance from Previous Purchase
                 </label>
                 <span className="px-2.5 py-0.5 rounded-md font-mono text-xs font-bold bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-50 shadow-2xs">
@@ -258,7 +258,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                 step="5"
                 value={features.distance_from_last_tx}
                 onChange={(e) => onUpdateFeature("distance_from_last_tx", parseFloat(e.target.value))}
-                className="w-full accent-cyan-500 cursor-pointer h-1.5"
+                className="w-full accent-zinc-900 dark:accent-zinc-100 cursor-pointer h-1.5"
               />
               <div className="grid grid-cols-3 text-[10px] font-sans text-zinc-400 dark:text-zinc-500 pt-0.5">
                 <span className="text-left">0 km (Same Merchant)</span>
@@ -273,7 +273,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
         <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/80">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold text-cyan-600 dark:text-cyan-400 tracking-wider">
+              <span className="text-[10px] font-mono font-bold text-zinc-400 tracking-wider">
                 [03]
               </span>
               <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono">
@@ -382,7 +382,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
               onClick={() => onUpdateFeature("online_order", features.online_order === 1 ? 0 : 1)}
               className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
                 features.online_order === 1
-                  ? "border-cyan-500/60 bg-cyan-500/10 dark:bg-cyan-950/30 text-cyan-950 dark:text-cyan-200 shadow-2xs"
+                  ? "border-zinc-400 dark:border-zinc-600 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-2xs"
                   : "border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/40 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700"
               }`}
             >
@@ -392,7 +392,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                 </span>
                 <span
                   className={`w-1.5 h-1.5 rounded-full ${
-                    features.online_order === 1 ? "bg-cyan-500 shadow-xs shadow-cyan-500" : "bg-zinc-300 dark:bg-zinc-700"
+                    features.online_order === 1 ? "bg-zinc-700 dark:bg-zinc-300 shadow-xs" : "bg-zinc-300 dark:bg-zinc-700"
                   }`}
                 />
               </div>
@@ -412,8 +412,8 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
         <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-2.5">
           <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-sans text-zinc-500 dark:text-zinc-400">
             {isAnalyzing ? (
-              <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-medium">
-                <span className="w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
+              <div className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 font-medium">
+                <span className="w-2 h-2 rounded-full bg-zinc-500 animate-ping" />
                 <span>Running XGBoost + SHAP TreeExplainer & drafting legal compliance memo...</span>
               </div>
             ) : (
@@ -430,8 +430,8 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
             disabled={isAnalyzing}
             className={`w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2 rounded-xl font-sans font-bold text-xs shadow-lg transition-all cursor-pointer border ${
               isAnalyzing
-                ? "bg-gradient-to-r from-cyan-600 via-indigo-600 to-cyan-600 text-white border-cyan-400/50 animate-pulse shadow-cyan-500/20"
-                : "bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-950 shadow-zinc-950/10 dark:shadow-cyan-950/20 hover:scale-[1.02] active:scale-[0.98] border-zinc-800 dark:border-zinc-200"
+                ? "bg-zinc-800 text-white border-zinc-700 animate-pulse"
+                : "bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-950 shadow-zinc-950/10 hover:scale-[1.02] active:scale-[0.98] border-zinc-800 dark:border-zinc-200"
             }`}
           >
             {isAnalyzing ? (
@@ -441,7 +441,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
               </>
             ) : (
               <>
-                <Play className="w-3 h-3 fill-current text-cyan-400 dark:text-cyan-600" />
+                <Play className="w-3 h-3 fill-current text-zinc-100 dark:text-zinc-900" />
                 <span>Analyze Transaction Risk</span>
               </>
             )}

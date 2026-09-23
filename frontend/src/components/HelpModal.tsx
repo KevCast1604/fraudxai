@@ -26,7 +26,7 @@ export const HelpModal: React.FC = () => {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg hover:shadow-indigo-500/25 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-4 focus:ring-indigo-500/30 active:scale-95"
+          className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 border border-zinc-700 dark:border-zinc-300 shadow-lg transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-zinc-400 active:scale-95"
           aria-label="Open User Guide & Documentation"
           title="Dashboard User Guide"
         >
@@ -50,7 +50,7 @@ export const HelpModal: React.FC = () => {
             {/* Modal Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center border border-zinc-200 dark:border-zinc-700">
                   <HelpCircle className="w-5 h-5" />
                 </div>
                 <div>
@@ -77,13 +77,13 @@ export const HelpModal: React.FC = () => {
             <div className="flex-1 overflow-y-auto p-6 space-y-6 text-sm text-zinc-600 dark:text-zinc-300">
               {/* Step 1: Sandbox & Presets */}
               <div className="flex gap-4">
-                <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 flex items-center justify-center shrink-0">
                   <Sliders className="w-5 h-5" />
                 </div>
                 <div className="space-y-1.5">
                   <h4 className="font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
                     <span>1. Transaction Sandbox & 1-Click Presets</span>
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
                       Step 1
                     </span>
                   </h4>
@@ -151,7 +151,7 @@ export const HelpModal: React.FC = () => {
                       href="https://my-app-1ombyk.adaptionlabs.app/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline transition-colors"
                     >
                       <span>Open Adaption Labs Ops Portal (Score 10/10)</span>
                       <span>↗</span>

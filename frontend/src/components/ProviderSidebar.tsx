@@ -30,7 +30,7 @@ const ENGINE_OPTIONS: EngineOption[] = [
     id: "featherless",
     name: "Featherless.ai",
     badge: "Default Engine",
-    badgeColor: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/30",
+    badgeColor: "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700",
     model: "Qwen/Qwen2.5-7B-Instruct",
     speed: "~15 - 25s",
     description: "Open-weights serverless inference engine with high fidelity to CFPB, FinCEN SAR, and GDPR statutory formatting.",
@@ -95,7 +95,7 @@ export const ProviderSidebar: React.FC<ProviderSidebarProps> = ({
           {/* Header */}
           <div className="p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50/50 dark:bg-zinc-950/40">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+              <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-700 dark:text-zinc-300">
                 <Cpu className="w-5 h-5" />
               </div>
               <div>
@@ -167,7 +167,7 @@ export const ProviderSidebar: React.FC<ProviderSidebarProps> = ({
                     }}
                     className={`p-4 rounded-xl border cursor-pointer transition-all ${
                       isSelected
-                        ? "border-cyan-500 bg-cyan-500/5 dark:bg-cyan-950/20 shadow-sm ring-1 ring-cyan-500/30"
+                        ? "border-zinc-900 dark:border-zinc-100 bg-zinc-100/90 dark:bg-zinc-800/80 shadow-sm ring-1 ring-zinc-900/10 dark:ring-zinc-100/10"
                         : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 hover:border-zinc-300 dark:hover:border-zinc-700"
                     }`}
                   >
@@ -176,7 +176,7 @@ export const ProviderSidebar: React.FC<ProviderSidebarProps> = ({
                         <div
                           className={`w-4 h-4 rounded-full flex items-center justify-center border ${
                             isSelected
-                              ? "border-cyan-500 bg-cyan-500 text-white"
+                              ? "border-zinc-900 dark:border-zinc-100 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900"
                               : "border-zinc-400 dark:border-zinc-600"
                           }`}
                         >
@@ -215,7 +215,7 @@ export const ProviderSidebar: React.FC<ProviderSidebarProps> = ({
             {/* Resilient Failover Notice */}
             <div className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/60 text-xs text-zinc-600 dark:text-zinc-400 space-y-1.5 font-sans">
               <div className="flex items-center gap-1.5 font-bold text-zinc-800 dark:text-zinc-200">
-                <Server className="w-3.5 h-3.5 text-cyan-500" />
+                <Server className="w-3.5 h-3.5 text-zinc-400" />
                 <span>Automatic Dynamic Failover Active</span>
               </div>
               <p className="text-[11px] leading-relaxed">
@@ -232,7 +232,7 @@ export const ProviderSidebar: React.FC<ProviderSidebarProps> = ({
                 onClose();
               }}
               disabled={isAnalyzing}
-              className="flex-1 py-2.5 px-4 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/20 disabled:opacity-50 transition-all cursor-pointer"
+              className="flex-1 py-2.5 px-4 rounded-xl bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 font-bold text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 transition-all cursor-pointer"
             >
               {isAnalyzing ? (
                 <>

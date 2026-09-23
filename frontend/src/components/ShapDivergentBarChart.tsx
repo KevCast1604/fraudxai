@@ -31,7 +31,7 @@ export const ShapDivergentBarChart: React.FC<ShapDivergentBarChartProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800/80 gap-2.5">
           <div>
             <div className="flex items-center gap-2">
-              <ArrowLeftRight className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+              <ArrowLeftRight className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono">
                 Why did the system make this decision? (Key Factors)
               </h3>
@@ -88,7 +88,7 @@ export const ShapDivergentBarChart: React.FC<ShapDivergentBarChartProps> = ({
                 {/* Feature Name and Observed Value */}
                 <div className="col-span-12 sm:col-span-5 pr-2">
                   <div
-                    className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors break-words font-sans"
+                    className="text-xs font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors break-words font-sans"
                     title={item.label}
                   >
                     {item.label}
@@ -111,7 +111,7 @@ export const ShapDivergentBarChart: React.FC<ShapDivergentBarChartProps> = ({
                     {!isPositive && (
                       <div
                         style={{ width: `${Math.min(100, barWidthPercent)}%` }}
-                        className="h-3.5 bg-gradient-to-l from-emerald-500 to-teal-400 rounded-l-md transition-all duration-700 ease-out shadow-xs group-hover:brightness-110"
+                        className="h-3.5 bg-emerald-500 rounded-l-md transition-all duration-700 ease-out shadow-xs group-hover:brightness-110"
                         title={`Reduces fraud risk: -${Math.abs(item.shap_value).toFixed(4)}`}
                       />
                     )}
@@ -122,7 +122,7 @@ export const ShapDivergentBarChart: React.FC<ShapDivergentBarChartProps> = ({
                     {isPositive && (
                       <div
                         style={{ width: `${Math.min(100, barWidthPercent)}%` }}
-                        className="h-3.5 bg-gradient-to-r from-rose-500 to-red-400 rounded-r-md transition-all duration-700 ease-out shadow-xs group-hover:brightness-110"
+                        className="h-3.5 bg-rose-500 rounded-r-md transition-all duration-700 ease-out shadow-xs group-hover:brightness-110"
                         title={`Increases fraud risk: +${item.shap_value.toFixed(4)}`}
                       />
                     )}
@@ -146,7 +146,7 @@ export const ShapDivergentBarChart: React.FC<ShapDivergentBarChartProps> = ({
               {/* Regulatory / Explanatory Reason: Always fully visible without cutoff */}
               {item.regulatory_reason && (
                 <div className="mt-1.5 text-[10px] sm:text-[11px] text-zinc-600 dark:text-zinc-300 font-sans leading-relaxed bg-zinc-50/80 dark:bg-zinc-950/40 p-2.5 rounded-md border border-zinc-200/60 dark:border-zinc-800/60">
-                  <span className="font-sans text-[10px] font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-wider mr-1.5">
+                  <span className="font-sans text-[10px] font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mr-1.5">
                     Explanation:
                   </span>
                   <span className="break-words">{item.regulatory_reason}</span>

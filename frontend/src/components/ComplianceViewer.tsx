@@ -102,7 +102,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
       <div className="sticky top-0 z-20 flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-5 border-b border-zinc-100 dark:border-zinc-800/80 gap-3 print:hidden bg-zinc-50/95 dark:bg-zinc-950/90 backdrop-blur-md shadow-xs">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-zinc-900 dark:bg-zinc-800 flex items-center justify-center border border-zinc-700/60">
-            <FileCheck2 className="w-4 h-4 text-cyan-400" />
+            <FileCheck2 className="w-4 h-4 text-zinc-100 dark:text-zinc-100" />
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -126,12 +126,12 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
           >
             {isExpanded ? (
               <>
-                <Minimize2 className="w-3.5 h-3.5 text-cyan-500" />
+                <Minimize2 className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
                 <span>Compact View</span>
               </>
             ) : (
               <>
-                <Maximize2 className="w-3.5 h-3.5 text-cyan-500" />
+                <Maximize2 className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
                 <span>Expand View</span>
               </>
             )}
@@ -184,7 +184,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
           <div className="space-y-1">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded bg-zinc-950 dark:bg-zinc-900 border border-zinc-800 flex items-center justify-center print:border-black">
-                <ShieldAlert className="w-5 h-5 text-cyan-500 print:text-black" />
+                <ShieldAlert className="w-5 h-5 text-zinc-100 dark:text-zinc-100 print:text-black" />
               </div>
               <div>
                 <h1 className="text-base font-extrabold tracking-tight uppercase font-sans text-zinc-950 dark:text-zinc-50 print:text-black">
@@ -251,7 +251,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
                 <h1 className="text-lg font-bold tracking-tight text-zinc-950 dark:text-zinc-50 print:text-black border-b border-zinc-200 dark:border-zinc-800 pb-2 mb-4 font-sans uppercase" {...props} />
               ),
               h2: ({ ...props }) => (
-                <h2 className="text-sm font-bold uppercase tracking-wider text-cyan-700 dark:text-cyan-400 print:text-black mt-6 mb-2 font-sans" {...props} />
+                <h2 className="text-sm font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 print:text-black mt-6 mb-2 font-sans" {...props} />
               ),
               h3: ({ ...props }) => (
                 <h3 className="text-xs font-bold uppercase tracking-wide text-zinc-800 dark:text-zinc-200 print:text-black mt-4 mb-1 font-sans" {...props} />
@@ -260,7 +260,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
                 <p className="text-zinc-700 dark:text-zinc-300 print:text-black leading-relaxed" {...props} />
               ),
               blockquote: ({ ...props }) => (
-                <blockquote className="border-l-4 border-cyan-500 bg-cyan-500/5 dark:bg-cyan-500/10 p-3 rounded-r-lg italic text-xs my-3 text-zinc-700 dark:text-zinc-300" {...props} />
+                <blockquote className="border-l-4 border-zinc-400 dark:border-zinc-600 bg-zinc-100/60 dark:bg-zinc-800/40 p-3 rounded-r-lg italic text-xs my-3 text-zinc-700 dark:text-zinc-300" {...props} />
               ),
             }}
           >
@@ -272,7 +272,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
         <footer className="memo-avoid-break mt-12 pt-8 border-t-2 border-zinc-200 dark:border-zinc-800 print:border-black grid grid-cols-1 sm:grid-cols-2 gap-8 text-xs">
           <div>
             <div className="flex items-center gap-1.5 text-zinc-400 font-sans text-[10px] uppercase tracking-wider">
-              <Award className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+              <Award className="w-3.5 h-3.5 text-zinc-500" />
               <span>Algorithmic Attestation & Model Governance (SR 26-2 & GDPR Art. 22)</span>
             </div>
             <p className="font-semibold text-zinc-800 dark:text-zinc-200 print:text-black mt-1">
@@ -290,13 +290,13 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
       {!isExpanded && (
         <div className="p-3 border-t border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/70 dark:bg-zinc-950/60 flex items-center justify-between text-[11px] font-sans text-zinc-400 print:hidden px-6">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-600" />
             <span>Document docket viewing in compact mode (Scroll inside to review full memorandum).</span>
           </div>
           <button
             type="button"
             onClick={() => setIsExpanded(true)}
-            className="text-cyan-600 dark:text-cyan-400 hover:underline font-semibold font-mono text-[10px] flex items-center gap-1 cursor-pointer"
+            className="text-zinc-900 dark:text-zinc-100 hover:underline font-semibold font-mono text-[10px] flex items-center gap-1 cursor-pointer"
           >
             <span>Expand Full Document</span>
             <Maximize2 className="w-3 h-3" />

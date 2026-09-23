@@ -46,9 +46,9 @@ export default function Home() {
   }, [result]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50/60 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 font-sans tech-grid-pattern relative selection:bg-cyan-500/20 selection:text-cyan-900 dark:selection:text-cyan-200">
-      {/* Ambient Top Glow Effect */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-5xl h-64 bg-radial from-cyan-500/10 via-indigo-500/5 to-transparent blur-3xl pointer-events-none -z-10" />
+    <div className="min-h-screen flex flex-col bg-slate-50/60 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 font-sans tech-grid-pattern relative selection:bg-zinc-800 selection:text-white dark:selection:bg-zinc-200 dark:selection:text-zinc-900">
+      {/* Subtle Monochrome Ambient Top Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-5xl h-64 bg-radial from-zinc-300/20 dark:from-zinc-800/30 to-transparent blur-3xl pointer-events-none -z-10" />
 
       {/* Main Command Navbar */}
       <Navbar />
@@ -59,7 +59,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-2 border-b border-zinc-200/60 dark:border-zinc-800/60">
             <div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-cyan-500 shadow-xs shadow-cyan-500 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-xs shadow-emerald-500 animate-pulse" />
                 <span className="text-[11px] font-sans uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-bold">
                   Financial Security & Fraud Detection Intelligence
                 </span>
@@ -120,19 +120,19 @@ export default function Home() {
             {/* Active Analysis Loading Indicator Banner */}
             {isAnalyzing && (
               <section className="print:hidden shrink-0">
-                <div className="p-4 rounded-2xl border-2 border-cyan-500/40 bg-cyan-500/10 dark:bg-cyan-950/40 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+                <div className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100/90 dark:bg-zinc-900/90 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
                   <div className="flex items-center gap-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-600 dark:text-cyan-400 shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 flex items-center justify-center text-zinc-800 dark:text-zinc-200 shrink-0">
                       <RefreshCw className="w-5 h-5 animate-spin" />
                     </div>
                     <div>
                       <div className="text-xs sm:text-sm font-bold text-zinc-950 dark:text-zinc-50 font-mono flex items-center gap-2">
                         <span>Audit Pipeline Running</span>
-                        <span className="inline-block w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
+                        <span className="inline-block w-2 h-2 rounded-full bg-zinc-500 animate-ping" />
                       </div>
                       <p className="text-[11px] text-zinc-600 dark:text-zinc-400 font-sans mt-0.5">
                         Decomposing local SHAP attributions and drafting statutory compliance memorandum via{" "}
-                        <strong className="text-cyan-600 dark:text-cyan-400 font-mono">
+                        <strong className="text-zinc-900 dark:text-zinc-100 font-mono font-semibold">
                           {selectedProvider === "groq"
                             ? "Groq Cloud LPU (~2s)"
                             : selectedProvider === "offline"
@@ -144,7 +144,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 font-mono text-[10px] text-cyan-700 dark:text-cyan-300 bg-cyan-500/20 px-3 py-1.5 rounded-lg border border-cyan-500/30 font-bold uppercase tracking-wider shrink-0">
+                  <div className="flex items-center gap-2 font-mono text-[10px] text-zinc-800 dark:text-zinc-200 bg-zinc-200/80 dark:bg-zinc-800 px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 font-bold uppercase tracking-wider shrink-0">
                     In-Flight Processing
                   </div>
                 </div>
@@ -163,7 +163,7 @@ export default function Home() {
                   <div className="p-4 sm:p-5 rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl flex flex-col justify-between text-xs h-full">
                     <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800/80">
                       <div className="flex items-center gap-2">
-                        <ShieldCheck className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+                        <ShieldCheck className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
                         <span className="font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono text-xs">
                           Official Decision & Case File
                         </span>
@@ -238,11 +238,11 @@ export default function Home() {
       {/* Floating Engine Hub Trigger Tab (Right Edge of Screen) */}
       <button
         onClick={() => setIsSidebarOpen(true)}
-        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-white/95 dark:bg-zinc-900/95 border-l-2 border-y border-cyan-500 hover:border-cyan-400 text-zinc-700 dark:text-zinc-200 hover:text-cyan-600 dark:hover:text-cyan-400 px-2 py-3.5 rounded-l-xl shadow-2xl flex flex-col items-center gap-2 cursor-pointer group print:hidden transition-all backdrop-blur-md"
+        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 bg-white/95 dark:bg-zinc-900/95 border-l-2 border-y border-zinc-400 dark:border-zinc-600 hover:border-zinc-900 dark:hover:border-zinc-100 text-zinc-700 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white px-2 py-3.5 rounded-l-xl shadow-2xl flex flex-col items-center gap-2 cursor-pointer group print:hidden transition-all backdrop-blur-md"
         title="Open AI Provider & Inference Engine Settings"
       >
-        <Cpu className="w-4 h-4 text-cyan-500 group-hover:scale-125 transition-transform" />
-        <span className="[writing-mode:vertical-rl] text-[9px] font-mono font-bold tracking-widest uppercase rotate-180 text-zinc-500 dark:text-zinc-400 group-hover:text-cyan-500">
+        <Cpu className="w-4 h-4 text-zinc-700 dark:text-zinc-300 group-hover:scale-125 transition-transform" />
+        <span className="[writing-mode:vertical-rl] text-[9px] font-mono font-bold tracking-widest uppercase rotate-180 text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100">
           Engine Hub
         </span>
       </button>
@@ -251,7 +251,7 @@ export default function Home() {
       <footer className="border-t border-zinc-200/80 dark:border-zinc-800/80 py-8 mt-12 bg-white/70 dark:bg-zinc-950/80 backdrop-blur-md text-xs text-zinc-400 print:hidden transition-colors">
         <div className="max-w-[1620px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] font-sans">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-cyan-500" />
+            <div className="w-2 h-2 rounded-full bg-zinc-400 dark:bg-zinc-600" />
             <span>
               <strong>FraudxAI</strong> • Explainable AI for Risk & Regulatory Compliance
             </span>

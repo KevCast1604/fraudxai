@@ -24,17 +24,17 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
 
         <div className="flex items-center gap-2.5">
           <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-sans text-zinc-400">
-            <Server className="w-3 h-3 text-cyan-500" />
+            <Server className="w-3 h-3 text-zinc-400" />
             <span className="font-semibold text-zinc-600 dark:text-zinc-300">Cluster Nominal</span>
           </div>
 
           {onOpenSettings && (
             <button
               onClick={onOpenSettings}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 text-[11px] font-mono font-bold transition-all cursor-pointer shadow-2xs"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 text-[11px] font-mono font-bold transition-all cursor-pointer shadow-2xs"
               title="Open AI Provider selection sidebar"
             >
-              <Settings2 className="w-3.5 h-3.5 text-cyan-500" />
+              <Settings2 className="w-3.5 h-3.5 text-zinc-500" />
               <span>Change Provider / Settings</span>
             </button>
           )}
@@ -46,7 +46,7 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
         <div
           onClick={onOpenSettings}
           className={`p-2.5 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40 ${
-            onOpenSettings ? "cursor-pointer hover:border-cyan-500/40 transition-colors group" : ""
+            onOpenSettings ? "cursor-pointer hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors group" : ""
           }`}
           title={onOpenSettings ? "Click to change provider" : undefined}
         >
@@ -55,13 +55,13 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
               AI Provider
             </span>
             {onOpenSettings && (
-              <span className="text-[9px] font-mono text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="text-[9px] font-mono text-zinc-500 dark:text-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity">
                 Edit ↗
               </span>
             )}
           </div>
           <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100 font-mono mt-1 inline-flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-500" />
             {telemetry.provider}
           </span>
         </div>

@@ -85,8 +85,7 @@ export const RadialRiskGauge: React.FC<RadialRiskGaugeProps> = ({ score, size = 
           <defs>
             <linearGradient id="riskTrackGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#10b981" />   {/* Emerald */}
-              <stop offset="35%" stopColor="#38bdf8" />  {/* Sky */}
-              <stop offset="65%" stopColor="#fbbf24" />  {/* Amber */}
+              <stop offset="50%" stopColor="#f59e0b" />  {/* Amber */}
               <stop offset="100%" stopColor="#f43f5e" /> {/* Rose */}
             </linearGradient>
 
@@ -160,10 +159,10 @@ export const RadialRiskGauge: React.FC<RadialRiskGaugeProps> = ({ score, size = 
           >
             {/* Needle Body */}
             <polygon points="137,145 143,145 140,46" className="fill-zinc-900 dark:fill-zinc-100" />
-            <line x1="140" y1="145" x2="140" y2="46" stroke="#06b6d4" strokeWidth="1" />
+            <line x1="140" y1="145" x2="140" y2="46" stroke="#a1a1aa" strokeWidth="1" />
             {/* Center Pivot Boss */}
             <circle cx="140" cy="145" r="9" className="fill-zinc-900 dark:fill-zinc-100" />
-            <circle cx="140" cy="145" r="4" className="fill-cyan-400" />
+            <circle cx="140" cy="145" r="4" className="fill-zinc-400 dark:fill-zinc-500" />
           </g>
         </svg>
 
