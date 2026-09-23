@@ -33,6 +33,29 @@ export interface ShapFactor {
   regulatory_reason: string;
 }
 
+export interface RecourseIntervention {
+  feature: string;
+  label: string;
+  current_value: string;
+  target_value: string;
+  intervention_type: string;
+}
+
+export interface ActionableRecourse {
+  recourse_id: string;
+  title: string;
+  description: string;
+  category: string;
+  simulated_risk_score: number;
+  simulated_risk_tier: "LOW" | "MEDIUM" | "CRITICAL";
+  simulated_action: string;
+  risk_delta: number;
+  target_achieved: boolean;
+  interventions: RecourseIntervention[];
+  regulatory_remedy: string;
+  patch_features: Partial<TransactionFeatures>;
+}
+
 export interface AuditTelemetry {
   provider: string;
   model: string;
@@ -51,6 +74,16 @@ export interface AnalysisResponse {
   shap_factors: ShapFactor[];
   compliance_memo: string;
   telemetry: AuditTelemetry;
+  actionable_recourse?: ActionableRecourse[];
+}
+
+export interface SimulateResponse {
+  risk_score: number;
+  risk_tier: "LOW" | "MEDIUM" | "CRITICAL";
+  regulatory_action: string;
+  base_value: number;
+  shap_factors: ShapFactor[];
+  actionable_recourse: ActionableRecourse[];
 }
 
 export interface PresetScenario {

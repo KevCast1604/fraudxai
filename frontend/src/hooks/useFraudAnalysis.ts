@@ -28,9 +28,15 @@ export function useFraudAnalysis() {
     applyPreset(PRESET_SCENARIOS[0]);
   }, [applyPreset]);
 
-  const runAnalysis = useCallback(async (providerOverride?: string, modelOverride?: string) => {
+  const runAnalysis = useCallback(async (
+    providerOverride?: string,
+    modelOverride?: string,
+    featuresOverride?: TransactionFeatures
+  ) => {
     setIsAnalyzing(true);
     setError(null);
+
+    const activeFeatures = featuresOverride || features;
 
     // Strictly ensure providerOverride is a string (never a DOM/React SyntheticEvent)
     const validProvider =
@@ -44,7 +50,7 @@ export function useFraudAnalysis() {
         : selectedModel;
 
     const payload = {
-      ...features,
+      ...activeFeatures,
       provider: validProvider,
       model: validModel || undefined,
     };
@@ -74,6 +80,17 @@ export function useFraudAnalysis() {
     }
   }, [features, selectedProvider, selectedModel]);
 
+  const applyRecoursePatch = useCallback((patch: Partial<TransactionFeatures>, andAnalyze: boolean = true) => {
+    setSelectedPresetId("what-if-recourse");
+    setFeatures((prev) => {
+      const updated = { ...prev, ...patch };
+      if (andAnalyze) {
+        runAnalysis(undefined, undefined, updated);
+      }
+      return updated;
+    });
+  }, [runAnalysis]);
+
   // Run initial analysis automatically on mount
   useEffect(() => {
     runAnalysis();
@@ -92,6 +109,7 @@ export function useFraudAnalysis() {
     error,
     applyPreset,
     updateFeature,
+    applyRecoursePatch,
     resetFeatures,
     runAnalysis,
   };
