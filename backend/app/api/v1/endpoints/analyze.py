@@ -9,11 +9,11 @@ import logging
 from fastapi import APIRouter, HTTPException
 
 try:
-    from app.schemas.transaction import TransactionInput, AnalysisResponse
+    from app.schemas.transaction import TransactionInput, AnalysisResponse, SimulateResponse
     from app.services.ml_service import ml_service
     from app.services.compliance_agent import compliance_agent
 except ModuleNotFoundError:
-    from backend.app.schemas.transaction import TransactionInput, AnalysisResponse
+    from backend.app.schemas.transaction import TransactionInput, AnalysisResponse, SimulateResponse
     from backend.app.services.ml_service import ml_service
     from backend.app.services.compliance_agent import compliance_agent
 
@@ -27,7 +27,8 @@ async def analyze_transaction(tx: TransactionInput) -> AnalysisResponse:
     Analyzes a financial transaction:
     1. Evaluates fraud risk probability using calibrated XGBoost classifier.
     2. Calculates exact local feature attributions using SHAP TreeExplainer.
-    3. Synthesizes an auditable compliance memorandum via Resilient LLM Agent.
+    3. Computes actionable counterfactual recourse pathways (Right to Recourse).
+    4. Synthesizes an auditable compliance memorandum via Resilient LLM Agent.
     """
     try:
         # Generate unique audit reference ID and UTC timestamp
@@ -37,7 +38,15 @@ async def analyze_transaction(tx: TransactionInput) -> AnalysisResponse:
         # Step 1 & 2: XGBoost & SHAP local decomposition
         risk_score, risk_tier, regulatory_action, shap_factors = ml_service.predict_and_explain(tx)
 
-        # Step 3: Resilient LLM compliance memorandum generation
+        # Step 3: Counterfactual Actionable Recourse Computation (Right to Recourse)
+        actionable_recourse = ml_service.compute_actionable_recourse(
+            tx=tx,
+            current_risk=risk_score,
+            current_tier=risk_tier,
+            shap_factors=shap_factors,
+        )
+
+        # Step 4: Resilient LLM compliance memorandum generation
         memo_result = await compliance_agent.generate_compliance_memo(
             audit_id=audit_id,
             timestamp=timestamp,
@@ -49,6 +58,7 @@ async def analyze_transaction(tx: TransactionInput) -> AnalysisResponse:
             shap_factors=shap_factors,
             preferred_provider=getattr(tx, "provider", None),
             preferred_model=getattr(tx, "model", None),
+            actionable_recourse=actionable_recourse,
         )
 
         factors_data = [
@@ -74,6 +84,7 @@ async def analyze_transaction(tx: TransactionInput) -> AnalysisResponse:
             shap_factors=factors_data,
             compliance_memo=memo_result["memo"],
             telemetry=telemetry_data,
+            actionable_recourse=actionable_recourse,
         )
 
     except Exception as exc:
@@ -81,6 +92,36 @@ async def analyze_transaction(tx: TransactionInput) -> AnalysisResponse:
         raise HTTPException(
             status_code=500,
             detail=f"Internal fraud analysis pipeline error: {str(exc)}"
+        )
+
+
+@router.post("/simulate", response_model=SimulateResponse)
+async def simulate_transaction(tx: TransactionInput) -> SimulateResponse:
+    """
+    Ultra-fast (<5ms) simulation and counterfactual calculation without LLM call.
+    Returns predicted risk score, SHAP attributions, and actionable recourse pathways.
+    """
+    try:
+        risk_score, risk_tier, regulatory_action, shap_factors = ml_service.predict_and_explain(tx)
+        actionable_recourse = ml_service.compute_actionable_recourse(
+            tx=tx,
+            current_risk=risk_score,
+            current_tier=risk_tier,
+            shap_factors=shap_factors,
+        )
+        return SimulateResponse(
+            risk_score=risk_score,
+            risk_tier=risk_tier,
+            regulatory_action=regulatory_action,
+            base_value=ml_service.base_value,
+            shap_factors=shap_factors,
+            actionable_recourse=actionable_recourse,
+        )
+    except Exception as exc:
+        logger.error(f"Error simulating transaction: {exc}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Transaction simulation error: {str(exc)}"
         )
 
 

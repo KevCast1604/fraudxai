@@ -10,11 +10,11 @@ Aligns with:
 - FinCEN BSA/AML (31 CFR § 1020.320 - SAR 5 W's Narrative)
 """
 
-from typing import List
+from typing import List, Optional
 try:
-    from app.schemas.transaction import TransactionInput, ShapFactor
+    from app.schemas.transaction import TransactionInput, ShapFactor, ActionableRecourse
 except ModuleNotFoundError:
-    from backend.app.schemas.transaction import TransactionInput, ShapFactor
+    from backend.app.schemas.transaction import TransactionInput, ShapFactor, ActionableRecourse
 
 SYSTEM_COMPLIANCE_PROMPT = """You are a Senior Financial Crime & Regulatory Compliance Officer and Lead Auditor for a global tier-1 financial institution.
 Your responsibility is to synthesize predictive Machine Learning fraud classifications and mathematical SHAP (Shapley Additive exPlanations) attributions into an authoritative, legally binding Financial Crime & Compliance Memorandum.
@@ -42,8 +42,9 @@ def build_compliance_user_prompt(
     regulatory_action: str,
     base_value: float,
     shap_factors: List[ShapFactor],
+    actionable_recourse: Optional[List[ActionableRecourse]] = None,
 ) -> str:
-    """Formats the transaction details and SHAP vector into an audit briefing for the LLM."""
+    """Formats the transaction details, SHAP vector, and counterfactual recourse into an audit briefing for the LLM."""
     
     top_adverse = [f for f in shap_factors if f.risk_direction == "INCREASES_RISK"][:4]
     top_mitigating = [f for f in shap_factors if f.risk_direction == "MITIGATES_RISK"][:2]
@@ -61,6 +62,16 @@ def build_compliance_user_prompt(
     ])
     if not mitigating_table:
         mitigating_table = "| None | - | 0.0000 | No mitigating factors identified |"
+
+    recourse_section = ""
+    if actionable_recourse:
+        recourse_items = []
+        for idx, r in enumerate(actionable_recourse[:3]):
+            diffs = "; ".join([f"{i.label} ('{i.current_value}' -> '{i.target_value}')" for i in r.interventions])
+            recourse_items.append(
+                f"- **Pathway {idx+1}: {r.title}** ({r.category}): Modifying [{diffs}] drops simulated risk from {risk_score*100:.1f}% to {r.simulated_risk_score*100:.1f}% ({r.simulated_risk_tier}, Action: {r.simulated_action}). Legal Authority: {r.regulatory_remedy}."
+            )
+        recourse_section = "\nACTIONABLE COUNTERFACTUAL RECOURSE (Right to Recourse / What-If Engine):\n" + "\n".join(recourse_items) + "\n"
 
     prompt = f"""Generate the official Regulatory Compliance Memorandum for the following flagged transaction:
 
@@ -92,14 +103,14 @@ TOP RISK MITIGATING FACTORS:
 | Feature | Observed Value | SHAP Impact (φ) | Regulatory Fact |
 | :--- | :---: | :---: | :--- |
 {mitigating_table}
-
+{recourse_section}
 REQUIRED SECTIONS IN YOUR OUTPUT MEMORANDUM:
 # FINANCIAL CRIME & REGULATORY COMPLIANCE MEMORANDUM
 ### I. EXECUTIVE SUMMARY & DISPOSITION (Include transaction parameters and formal status)
 ### II. MATHEMATICAL RISK ATTRIBUTION (Include the SHAP factor table and regulatory interpretation under CFPB Circular 2023-03)
 ### III. FinCEN SUSPICIOUS ACTIVITY REPORT (SAR) NARRATIVE (Synthesize Who, What, When, Where, Why/How if Tier is CRITICAL or MEDIUM; summarize benign profile if LOW)
 ### IV. MODEL GOVERNANCE & FAIR LENDING ATTESTATION (Adherence to Fed SR 26-2 & ECOA non-discrimination)
-### V. HUMAN OVERSIGHT & CONSUMER CONTESTATION NOTICE (GDPR Article 22 contestability and steps for cardholder re-evaluation)
+### V. HUMAN OVERSIGHT & ACTIONABLE RIGHT TO RECOURSE (GDPR Article 22(3) & CFPB Reg B: state the exact counterfactual modifications required to overturn adverse action)
 """
     return prompt
 
@@ -113,6 +124,7 @@ def build_deterministic_offline_memo(
     regulatory_action: str,
     base_value: float,
     shap_factors: List[ShapFactor],
+    actionable_recourse: Optional[List[ActionableRecourse]] = None,
 ) -> str:
     """Pre-compiled legal Markdown template rendered when cloud LLM endpoints are unavailable."""
     
@@ -120,6 +132,22 @@ def build_deterministic_offline_memo(
         f"| **{idx+1}** | **{f.label}** | `{f.observed_value}` | `{f.shap_value:+.4f}` | {f.regulatory_reason} |"
         for idx, f in enumerate(shap_factors[:5])
     ])
+
+    if actionable_recourse:
+        recourse_md_lines = []
+        for idx, r in enumerate(actionable_recourse[:3]):
+            diffs = "; ".join([f"`{i.label}` ({i.current_value} ➔ **{i.target_value}**)" for i in r.interventions])
+            status_tag = "**TARGET ACHIEVED: AUTO-APPROVED**" if r.target_achieved else f"**REDUCED TO {r.simulated_risk_tier}**"
+            recourse_md_lines.append(
+                f"* **Pathway {idx+1}: {r.title}** ({r.category})\n"
+                f"  - **Remediation Levers:** {diffs}\n"
+                f"  - **Mathematical Impact:** Risk drops from `{risk_score*100:.1f}%` to `{r.simulated_risk_score*100:.1f}%` (Δ -`{r.risk_delta*100:.1f}%` - {status_tag})\n"
+                f"  - **Statutory Authority:** {r.regulatory_remedy}\n"
+                f"  - **Action Plan:** {r.description}"
+            )
+        recourse_block = "\n".join(recourse_md_lines)
+    else:
+        recourse_block = "* **Disposition:** Current risk evaluation is LOW (<0.35). No adverse action contestation or counterfactual modification is required under CFPB Reg B."
 
     return f"""# FINANCIAL CRIME & REGULATORY COMPLIANCE MEMORANDUM
 **DOCUMENT REF:** {audit_id}  
@@ -162,8 +190,9 @@ In compliance with **CFPB Circular 2023-03** and **Federal Reserve / OCC SR 26-2
 
 ---
 
-### V. HUMAN-IN-THE-LOOP (HITL) OVERSIGHT & CONTESTATION RIGHTS
-*In accordance with **EU GDPR Article 22(3)** and **US FCRA Adverse Action Provisions**:*
+### V. HUMAN-IN-THE-LOOP (HITL) OVERSIGHT & RIGHT TO RECOURSE
+*In accordance with **EU GDPR Article 22(3)**, **US ECOA Reg B (§ 1002.9)**, and **CFPB Circular 2023-03**:*
 * **Consumer Contestation Notice:** The customer retains the statutory right to request human re-evaluation, contest this assessment, and provide verified evidence of legitimate transaction authorization.
-* **Remediation Protocol:** To unfreeze authorizations, the customer must complete secondary out-of-band biometric verification through verified mobile banking channels.
+* **Actionable Counterfactual Recourse (What-If Pathways):**
+{recourse_block}
 """

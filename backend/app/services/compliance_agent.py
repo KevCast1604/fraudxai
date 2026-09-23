@@ -18,7 +18,7 @@ import httpx
 
 try:
     from app.core.config import settings
-    from app.schemas.transaction import TransactionInput, ShapFactor, AuditTelemetry
+    from app.schemas.transaction import TransactionInput, ShapFactor, AuditTelemetry, ActionableRecourse
     from app.services.prompt_templates import (
         SYSTEM_COMPLIANCE_PROMPT,
         build_compliance_user_prompt,
@@ -26,7 +26,7 @@ try:
     )
 except ModuleNotFoundError:
     from backend.app.core.config import settings
-    from backend.app.schemas.transaction import TransactionInput, ShapFactor, AuditTelemetry
+    from backend.app.schemas.transaction import TransactionInput, ShapFactor, AuditTelemetry, ActionableRecourse
     from backend.app.services.prompt_templates import (
         SYSTEM_COMPLIANCE_PROMPT,
         build_compliance_user_prompt,
@@ -67,6 +67,7 @@ class ComplianceAgent:
         shap_factors: List[ShapFactor],
         preferred_provider: Optional[str] = None,
         preferred_model: Optional[str] = None,
+        actionable_recourse: Optional[List[ActionableRecourse]] = None,
     ) -> Dict[str, Any]:
         start_time = time.perf_counter()
         config = self._get_config()
@@ -80,6 +81,7 @@ class ComplianceAgent:
             regulatory_action=regulatory_action,
             base_value=base_value,
             shap_factors=shap_factors,
+            actionable_recourse=actionable_recourse,
         )
 
         # Build candidate providers list based on explicit override or config
@@ -209,6 +211,7 @@ class ComplianceAgent:
             regulatory_action=regulatory_action,
             base_value=base_value,
             shap_factors=shap_factors,
+            actionable_recourse=actionable_recourse,
         )
         latency_ms = int((time.perf_counter() - start_time) * 1000)
 
