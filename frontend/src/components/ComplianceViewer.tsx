@@ -74,7 +74,13 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
   }, [timestamp]);
 
   const handlePrint = () => {
+    const originalTitle = document.title;
+    const safeAuditId = auditId ? auditId.replace(/[^a-zA-Z0-9_-]/g, "_") : "Report";
+    document.title = `FraudxAI-Audit-Report-${safeAuditId}`;
     window.print();
+    setTimeout(() => {
+      document.title = originalTitle;
+    }, 1500);
   };
 
   const handleCopy = async () => {
@@ -97,7 +103,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
     : "Low Risk";
 
   return (
-    <div className="w-full rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transition-all">
+    <div className="w-full rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transition-all print:border-none print:shadow-none print:rounded-none print:bg-white print:overflow-visible print:w-full print:p-0 print:m-0">
       {/* Top Action Bar: Sticky during scroll, hidden during print */}
       <div className="sticky top-0 z-20 flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-5 border-b border-zinc-100 dark:border-zinc-800/80 gap-3 print:hidden bg-zinc-50/95 dark:bg-zinc-950/90 backdrop-blur-md shadow-xs">
         <div className="flex items-center gap-3">
@@ -163,16 +169,16 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
       <div
         className={`transition-all duration-300 ${
           isExpanded ? "max-h-none" : "max-h-[380px] overflow-y-auto"
-        } print:max-h-none print:overflow-visible`}
+        } print:max-h-none print:overflow-visible print:w-full print:p-0 print:m-0`}
       >
 
       {/* Official Audit Document Paper Layout */}
       <article
         id="compliance-document"
-        className="p-6 sm:p-8 text-zinc-900 dark:text-zinc-100 print:text-black print:dark:text-black print:p-0"
+        className="p-6 sm:p-8 text-zinc-900 dark:text-zinc-100 print:text-black print:dark:text-black print:w-full print:max-w-none print:bg-white"
       >
         {/* Security Classification Ribbon */}
-        <div className="memo-avoid-break mb-6 pb-2 border-b border-zinc-200 dark:border-zinc-800 print:border-black flex justify-between items-center text-[10px] font-sans tracking-wider text-zinc-400 uppercase">
+        <div className="memo-avoid-break mb-6 pb-2 border-b border-zinc-200 dark:border-zinc-800 print:border-zinc-300 flex justify-between items-center text-[10px] font-sans tracking-wider text-zinc-400 print:text-zinc-500 uppercase">
           <span>Financial Security & Compliance Operations</span>
           <span className="font-bold text-zinc-700 dark:text-zinc-300 print:text-black">
             Official Audit Record
@@ -229,38 +235,38 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
         </header>
 
         {/* Markdown Rendered Content with Sanitized Human Labels */}
-        <div className="prose prose-zinc dark:prose-invert max-w-none text-sm leading-relaxed space-y-5">
+        <div className="prose prose-zinc dark:prose-invert max-w-none text-sm leading-relaxed space-y-5 print:text-[10pt] print:space-y-4">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
               table: ({ ...props }) => (
-                <div className="overflow-x-auto my-6 rounded-lg border border-zinc-200 dark:border-zinc-800 print:border-zinc-400">
-                  <table className="min-w-full text-xs font-sans" {...props} />
+                <div className="overflow-x-auto my-6 rounded-lg border border-zinc-200 dark:border-zinc-800 print:border-zinc-300 print:overflow-visible print:my-4 print:w-full">
+                  <table className="w-full text-xs font-sans print:text-[9.5pt] print:table-fixed" {...props} />
                 </div>
               ),
               thead: ({ ...props }) => (
-                <thead className="bg-zinc-100 dark:bg-zinc-800/80 print:bg-zinc-200 border-b border-zinc-200 dark:border-zinc-700" {...props} />
+                <thead className="bg-zinc-100 dark:bg-zinc-800/80 print:bg-zinc-100 border-b border-zinc-200 dark:border-zinc-700 print:border-zinc-300" {...props} />
               ),
               th: ({ ...props }) => (
-                <th className="p-2.5 text-left font-bold text-zinc-800 dark:text-zinc-200 print:text-black uppercase tracking-wider text-[11px]" {...props} />
+                <th className="p-2.5 text-left font-bold text-zinc-800 dark:text-zinc-200 print:text-black uppercase tracking-wider text-[11px] print:text-[9pt] print:p-2 print:break-words print:whitespace-normal" {...props} />
               ),
               td: ({ ...props }) => (
-                <td className="p-2.5 border-b border-zinc-100 dark:border-zinc-800/60 print:border-zinc-300 text-zinc-700 dark:text-zinc-300 print:text-black" {...props} />
+                <td className="p-2.5 border-b border-zinc-100 dark:border-zinc-800/60 print:border-zinc-300 text-zinc-700 dark:text-zinc-300 print:text-black print:text-[9.5pt] print:p-2 print:break-words print:whitespace-normal" {...props} />
               ),
               h1: ({ ...props }) => (
-                <h1 className="text-lg font-bold tracking-tight text-zinc-950 dark:text-zinc-50 print:text-black border-b border-zinc-200 dark:border-zinc-800 pb-2 mb-4 font-sans uppercase" {...props} />
+                <h1 className="text-lg font-bold tracking-tight text-zinc-950 dark:text-zinc-50 print:text-black border-b border-zinc-200 dark:border-zinc-800 print:border-zinc-300 pb-2 mb-4 font-sans uppercase memo-avoid-break" {...props} />
               ),
               h2: ({ ...props }) => (
-                <h2 className="text-sm font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 print:text-black mt-6 mb-2 font-sans" {...props} />
+                <h2 className="text-sm font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 print:text-black mt-6 mb-2 font-sans memo-avoid-break" {...props} />
               ),
               h3: ({ ...props }) => (
-                <h3 className="text-xs font-bold uppercase tracking-wide text-zinc-800 dark:text-zinc-200 print:text-black mt-4 mb-1 font-sans" {...props} />
+                <h3 className="text-xs font-bold uppercase tracking-wide text-zinc-800 dark:text-zinc-200 print:text-black mt-4 mb-1 font-sans memo-avoid-break" {...props} />
               ),
               p: ({ ...props }) => (
                 <p className="text-zinc-700 dark:text-zinc-300 print:text-black leading-relaxed" {...props} />
               ),
               blockquote: ({ ...props }) => (
-                <blockquote className="border-l-4 border-zinc-400 dark:border-zinc-600 bg-zinc-100/60 dark:bg-zinc-800/40 p-3 rounded-r-lg italic text-xs my-3 text-zinc-700 dark:text-zinc-300" {...props} />
+                <blockquote className="border-l-4 border-zinc-400 dark:border-zinc-600 print:border-zinc-400 bg-zinc-100/60 dark:bg-zinc-800/40 print:bg-zinc-50 p-3 rounded-r-lg italic text-xs my-3 text-zinc-700 dark:text-zinc-300 print:text-black memo-avoid-break" {...props} />
               ),
             }}
           >
@@ -269,18 +275,22 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
         </div>
 
         {/* Legal Attestation & Verification Sign-off Footer */}
-        <footer className="memo-avoid-break mt-12 pt-8 border-t-2 border-zinc-200 dark:border-zinc-800 print:border-black grid grid-cols-1 sm:grid-cols-2 gap-8 text-xs">
+        <footer className="memo-avoid-break mt-12 pt-8 border-t-2 border-zinc-200 dark:border-zinc-800 print:border-zinc-400 grid grid-cols-1 sm:grid-cols-2 gap-8 text-xs">
           <div>
-            <div className="flex items-center gap-1.5 text-zinc-400 font-sans text-[10px] uppercase tracking-wider">
-              <Award className="w-3.5 h-3.5 text-zinc-500" />
+            <div className="flex items-center gap-1.5 text-zinc-400 print:text-zinc-500 font-sans text-[10px] uppercase tracking-wider">
+              <Award className="w-3.5 h-3.5 text-zinc-500 print:text-zinc-700" />
               <span>Algorithmic Attestation & Model Governance (SR 26-2 & GDPR Art. 22)</span>
             </div>
             <p className="font-semibold text-zinc-800 dark:text-zinc-200 print:text-black mt-1">
               Generated by FraudxAI Resilient Risk Governance Engine
             </p>
-            <p className="text-zinc-400 text-[10px] font-sans mt-0.5">
+            <p className="text-zinc-400 print:text-zinc-500 text-[10px] font-sans mt-0.5">
               Model: XGBoost-Fraud-v1.0 (ROC-AUC: 0.9445) • Explainability: Mathematical SHAP decomposition
             </p>
+          </div>
+          <div className="flex flex-col justify-end sm:text-right text-[10px] font-mono text-zinc-400 print:text-zinc-500">
+            <div>Docket #{auditId}</div>
+            <div>Official Statutory Record • All Rights Reserved</div>
           </div>
         </footer>
       </article>

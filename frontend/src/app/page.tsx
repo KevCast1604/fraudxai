@@ -50,12 +50,12 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50/60 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 font-sans tech-grid-pattern relative selection:bg-zinc-800 selection:text-white dark:selection:bg-zinc-200 dark:selection:text-zinc-900">
       {/* Subtle Monochrome Ambient Top Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-5xl h-64 bg-radial from-zinc-300/20 dark:from-zinc-800/30 to-transparent blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-5xl h-64 bg-radial from-zinc-300/20 dark:from-zinc-800/30 to-transparent blur-3xl pointer-events-none -z-10 print:hidden" />
 
       {/* Main Command Navbar */}
       <Navbar />
 
-      <main className="flex-1 max-w-[1620px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main className="flex-1 max-w-[1620px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 print:max-w-none print:w-full print:p-0 print:m-0 print:space-y-0">
         {/* Cockpit Context Banner */}
         <section className="print:hidden">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-2 border-b border-zinc-200/60 dark:border-zinc-800/60">
@@ -103,7 +103,7 @@ export default function Home() {
         )}
 
         {/* Core Split-Cockpit Grid: Simulator (Left) and Instant Diagnostic (Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start print:hidden">
           {/* Left Column: 1. Transaction Simulation Workbench */}
           <div className="lg:col-span-6 flex flex-col print:hidden lg:sticky lg:top-6">
             <SimulationPanel
@@ -225,7 +225,7 @@ export default function Home() {
 
         {/* Full-Width Telemetry & Compliance Sections Below Cockpit */}
         {result && (
-          <div className={isAnalyzing ? "opacity-50 pointer-events-none transition-opacity duration-300 space-y-6" : "transition-opacity duration-300 space-y-6"}>
+          <div className={isAnalyzing ? "opacity-50 pointer-events-none transition-opacity duration-300 space-y-6 print:space-y-0 print:w-full" : "transition-opacity duration-300 space-y-6 print:space-y-0 print:w-full"}>
             {/* 3. System & Evaluation Telemetry */}
             <section className="print:hidden">
               <TelemetryCard
@@ -235,7 +235,7 @@ export default function Home() {
             </section>
 
             {/* 4. Official Compliance Memorandum & Export */}
-            <section>
+            <section className="print:w-full print:p-0 print:m-0">
               <ComplianceViewer
                 memoMarkdown={result.compliance_memo}
                 auditId={result.audit_id}

@@ -110,22 +110,39 @@ input[type="range"]:focus {
 @media print {
   @page {
     size: A4 portrait;
-    margin: 15mm 20mm;
+    margin: 0;
   }
 
+  html,
   body {
+    margin: 0 !important;
+    padding: 0 !important;
     background: #ffffff !important;
     color: #09090b !important;
-    font-size: 10.5pt !important;
+    font-size: 10pt !important;
+    width: 100% !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  .print-hidden {
+  /* Document page padding to replace @page margin so localhost:3000 footer is suppressed */
+  #compliance-document {
+    padding: 16mm 18mm !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+  }
+
+  /* Prevent elements from hiding or overflowing */
+  .print-hidden,
+  .print\:hidden {
     display: none !important;
   }
 
-  .print-only {
+  .print-only,
+  .print\:block {
     display: block !important;
   }
 
@@ -134,4 +151,48 @@ input[type="range"]:focus {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
+
+  h1, h2, h3, h4 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Markdown and statutory tables print safety */
+  table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+  }
+
+  th,
+  td {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    white-space: normal !important;
+  }
+
+  /* Optimal column weighting for 4-column compliance audit tables */
+  table:has(th:nth-child(4):last-child) th:nth-child(1),
+  table:has(td:nth-child(4):last-child) td:nth-child(1) {
+    width: 25% !important;
+  }
+  table:has(th:nth-child(4):last-child) th:nth-child(2),
+  table:has(td:nth-child(4):last-child) td:nth-child(2) {
+    width: 18% !important;
+  }
+  table:has(th:nth-child(4):last-child) th:nth-child(3),
+  table:has(td:nth-child(4):last-child) td:nth-child(3) {
+    width: 17% !important;
+  }
+  table:has(th:nth-child(4):last-child) th:nth-child(4),
+  table:has(td:nth-child(4):last-child) td:nth-child(4) {
+    width: 40% !important;
+  }
 }
+
