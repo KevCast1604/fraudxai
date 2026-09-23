@@ -8,7 +8,7 @@ interface RadialRiskGaugeProps {
   size?: number;
 }
 
-export const RadialRiskGauge: React.FC<RadialRiskGaugeProps> = ({ score, size = 280 }) => {
+export const RadialRiskGauge: React.FC<RadialRiskGaugeProps> = ({ score, size = 230 }) => {
   const clampedScore = Math.max(0, Math.min(1, score));
   const radius = 94;
   const strokeWidth = 10;
@@ -54,7 +54,7 @@ export const RadialRiskGauge: React.FC<RadialRiskGaugeProps> = ({ score, size = 
   const StatusIcon = severity.icon;
 
   return (
-    <div className="relative flex flex-col items-center justify-between p-6 rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl overflow-hidden h-full">
+    <div className="relative flex flex-col items-center justify-between p-4 sm:p-5 rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl overflow-hidden h-full">
       {/* Background ambient glow matching severity */}
       <div
         className="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full blur-3xl opacity-15 pointer-events-none"
@@ -62,7 +62,7 @@ export const RadialRiskGauge: React.FC<RadialRiskGaugeProps> = ({ score, size = 
       />
 
       {/* Header telemetry tag */}
-      <div className="w-full flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800/80">
+      <div className="w-full flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800/80">
         <div className="flex items-center gap-2">
           <div className={`w-2 h-2 rounded-full ${severity.beaconColor} shadow-xs animate-pulse`} />
           <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-bold">
@@ -177,25 +177,25 @@ export const RadialRiskGauge: React.FC<RadialRiskGaugeProps> = ({ score, size = 
       </div>
 
       {/* Digital Readout Block */}
-      <div className="w-full mt-2 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col items-center">
+      <div className="w-full mt-1 pt-2 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col items-center">
         <div className="flex items-baseline gap-1">
-          <span className="text-4xl font-black tracking-tight font-mono text-zinc-950 dark:text-zinc-50">
+          <span className="text-3xl sm:text-4xl font-black tracking-tight font-mono text-zinc-950 dark:text-zinc-50">
             {(clampedScore * 100).toFixed(1)}
           </span>
-          <span className="text-lg font-bold font-mono text-zinc-400">%</span>
+          <span className="text-base font-bold font-mono text-zinc-400">%</span>
         </div>
-        <span className="text-[11px] uppercase font-sans tracking-wider text-zinc-500 dark:text-zinc-400 mt-0.5 font-medium">
+        <span className="text-[10px] uppercase font-sans tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">
           Calculated Fraud Probability
         </span>
 
         {/* Action Status Pill */}
         <div
-          className={`mt-3 w-full py-2 px-3 rounded-xl border flex items-center justify-center gap-2 text-xs font-sans font-bold tracking-wide transition-all ${severity.badgeColor}`}
+          className={`mt-2 w-full py-1.5 px-2.5 rounded-lg border flex items-center justify-center gap-1.5 text-xs font-sans font-bold tracking-wide transition-all ${severity.badgeColor}`}
         >
           <StatusIcon className="w-3.5 h-3.5 shrink-0" />
           <span>{severity.label}</span>
           <span className="opacity-50">•</span>
-          <span className="text-[11px] font-medium tracking-normal">{severity.action}</span>
+          <span className="text-[10px] sm:text-[11px] font-medium tracking-normal">{severity.action}</span>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { ShieldCheck, Cpu, Scale, Activity, ExternalLink } from "lucide-react";
 export const Navbar: React.FC = () => {
   return (
     <header className="w-full border-b border-zinc-200/80 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl sticky top-0 z-50 print:hidden transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-[1620px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand identity */}
         <div className="flex items-center gap-3.5">
           <div className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900 dark:bg-zinc-800 border border-zinc-700/60 shadow-inner group">

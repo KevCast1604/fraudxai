@@ -11,8 +11,8 @@ interface TelemetryCardProps {
 
 export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenSettings }) => {
   return (
-    <div className="rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-5 shadow-xl print:hidden">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800/80 gap-2">
+    <div className="rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-4 sm:p-5 shadow-xl print:hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2.5 border-b border-zinc-100 dark:border-zinc-800/80 gap-2">
         <div className="flex items-center gap-2.5">
           <div className="w-6 h-6 rounded-md bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
             <Activity className="w-3.5 h-3.5 text-emerald-500" />
@@ -41,11 +41,11 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
         </div>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mt-3">
         {/* Active Provider */}
         <div
           onClick={onOpenSettings}
-          className={`p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40 ${
+          className={`p-2.5 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40 ${
             onOpenSettings ? "cursor-pointer hover:border-cyan-500/40 transition-colors group" : ""
           }`}
           title={onOpenSettings ? "Click to change provider" : undefined}
@@ -67,7 +67,7 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
         </div>
 
         {/* Model Architecture */}
-        <div className="p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40">
+        <div className="p-2.5 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40">
           <span className="text-[10px] text-zinc-400 font-sans uppercase tracking-wider block">
             Drafting Model
           </span>
@@ -80,7 +80,7 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
         </div>
 
         {/* Inference Latency */}
-        <div className="p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40">
+        <div className="p-2.5 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40">
           <span className="text-[10px] text-zinc-400 font-sans uppercase tracking-wider block">
             Response Time
           </span>
@@ -91,7 +91,7 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
         </div>
 
         {/* Failover Status */}
-        <div className="p-3 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40">
+        <div className="p-2.5 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-950/40">
           <span className="text-[10px] text-zinc-400 font-sans uppercase tracking-wider block">
             Server Status
           </span>

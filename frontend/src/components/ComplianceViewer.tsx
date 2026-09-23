@@ -99,7 +99,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
   return (
     <div className="w-full rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transition-all">
       {/* Top Action Bar: Sticky during scroll, hidden during print */}
-      <div className="sticky top-0 z-20 flex flex-col sm:flex-row sm:items-center justify-between p-5 border-b border-zinc-100 dark:border-zinc-800/80 gap-4 print:hidden bg-zinc-50/95 dark:bg-zinc-950/90 backdrop-blur-md shadow-xs">
+      <div className="sticky top-0 z-20 flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-5 border-b border-zinc-100 dark:border-zinc-800/80 gap-3 print:hidden bg-zinc-50/95 dark:bg-zinc-950/90 backdrop-blur-md shadow-xs">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-zinc-900 dark:bg-zinc-800 flex items-center justify-center border border-zinc-700/60">
             <FileCheck2 className="w-4 h-4 text-cyan-400" />
@@ -162,14 +162,14 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
       {/* Scrollable Container with Custom Viewport Height */}
       <div
         className={`transition-all duration-300 ${
-          isExpanded ? "max-h-none" : "max-h-[560px] overflow-y-auto"
+          isExpanded ? "max-h-none" : "max-h-[380px] overflow-y-auto"
         } print:max-h-none print:overflow-visible`}
       >
 
       {/* Official Audit Document Paper Layout */}
       <article
         id="compliance-document"
-        className="p-8 sm:p-12 text-zinc-900 dark:text-zinc-100 print:text-black print:dark:text-black print:p-0"
+        className="p-6 sm:p-8 text-zinc-900 dark:text-zinc-100 print:text-black print:dark:text-black print:p-0"
       >
         {/* Security Classification Ribbon */}
         <div className="memo-avoid-break mb-6 pb-2 border-b border-zinc-200 dark:border-zinc-800 print:border-black flex justify-between items-center text-[10px] font-sans tracking-wider text-zinc-400 uppercase">
