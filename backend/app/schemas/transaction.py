@@ -31,6 +31,31 @@ class ShapFactor(BaseModel):
     regulatory_reason: str = Field(..., description="Statutory compliance description under CFPB Reg B / SR 26-2")
 
 
+class RecourseIntervention(BaseModel):
+    """Specific feature adjustment proposed to achieve counterfactual risk reduction."""
+    feature: str = Field(..., description="Feature key being modified")
+    label: str = Field(..., description="Human-readable feature name")
+    current_value: str = Field(..., description="Current observed feature value")
+    target_value: str = Field(..., description="Recommended counterfactual feature value")
+    intervention_type: str = Field(..., description="Category: AUTHENTICATION, HARDWARE_EMV, MERCHANT_TRUST, GEOLOCATION, etc.")
+
+
+class ActionableRecourse(BaseModel):
+    """Counterfactual recourse path to overturn adverse block or reduce elevated risk (CFPB Reg B / GDPR Art. 22)."""
+    recourse_id: str = Field(..., description="Unique recourse scenario identifier")
+    title: str = Field(..., description="Actionable title for the recourse path")
+    description: str = Field(..., description="Operational explanation of what cardholder or bank can do")
+    category: str = Field(..., description="Primary category of the intervention")
+    simulated_risk_score: float = Field(..., description="Simulated fraud probability after applying intervention")
+    simulated_risk_tier: str = Field(..., description="LOW, MEDIUM, or CRITICAL after intervention")
+    simulated_action: str = Field(..., description="Prescribed institutional action after intervention")
+    risk_delta: float = Field(..., description="Reduction in fraud probability (positive indicates risk reduced)")
+    target_achieved: bool = Field(..., description="True if simulated risk score drops to LOW (<0.35)")
+    interventions: List[RecourseIntervention] = Field(..., description="List of concrete parameter modifications")
+    regulatory_remedy: str = Field(..., description="Statutory compliance citation under CFPB Reg B / GDPR Art. 22(3)")
+    patch_features: dict = Field(..., description="Raw dictionary of feature key-values to apply to simulation")
+
+
 class AuditTelemetry(BaseModel):
     """Inference telemetry and audit trail metadata."""
     provider: str = Field(..., description="LLM provider executed (featherless, groq, adaption_labs, or offline_fallback)")
@@ -41,7 +66,7 @@ class AuditTelemetry(BaseModel):
 
 
 class AnalysisResponse(BaseModel):
-    """Comprehensive fraud analysis response with risk scoring, XAI attribution, and legal memo."""
+    """Comprehensive fraud analysis response with risk scoring, XAI attribution, legal memo, and actionable recourse."""
     audit_id: str = Field(..., description="Unique compliance audit identifier (ACM-...)")
     timestamp: str = Field(..., description="ISO 8601 UTC timestamp of decision")
     risk_score: float = Field(..., ge=0.0, le=1.0, description="Predicted fraud probability (0.0 to 1.0)")
@@ -51,3 +76,17 @@ class AnalysisResponse(BaseModel):
     shap_factors: List[ShapFactor] = Field(..., description="Decomposed feature contributions ranked by absolute impact")
     compliance_memo: str = Field(..., description="Generated legal compliance memorandum in Markdown")
     telemetry: AuditTelemetry = Field(..., description="Execution telemetry and audit provenance")
+    actionable_recourse: List[ActionableRecourse] = Field(
+        default_factory=list,
+        description="Actionable counterfactual interventions to overturn adverse decision"
+    )
+
+
+class SimulateResponse(BaseModel):
+    """Ultra-fast (<5ms) simulation and counterfactual calculation response without LLM call."""
+    risk_score: float = Field(..., ge=0.0, le=1.0, description="Predicted fraud probability (0.0 to 1.0)")
+    risk_tier: str = Field(..., description="LOW (<0.35), MEDIUM (0.35-0.70), or CRITICAL (>=0.70)")
+    regulatory_action: str = Field(..., description="Prescribed institutional action")
+    base_value: float = Field(..., description="Expected baseline portfolio margin score")
+    shap_factors: List[ShapFactor] = Field(..., description="Decomposed feature contributions")
+    actionable_recourse: List[ActionableRecourse] = Field(..., description="Actionable counterfactual recourse paths")
