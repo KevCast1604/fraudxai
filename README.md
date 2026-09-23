@@ -164,7 +164,7 @@ Unlike obfuscated PCA datasets ($V_1, \dots, V_{28}$), FraudxAI operates exclusi
 
 ## 6. Empirical Dataset & Machine Learning Rigor
 
-FraudxAI is trained and evaluated on the **Kaggle / OpenML Credit Card Fraud Prediction Benchmark** (`card_transdata.csv` / OpenML Dataset ID 43924), consisting of 1,000,000 empirical card transactions with business-readable features.
+FraudxAI is trained and evaluated on the **Kaggle Credit Card Fraud Prediction Benchmark** ([dhanushnarayananr/credit-card-fraud](https://www.kaggle.com/datasets/dhanushnarayananr/credit-card-fraud) / [OpenML ID 45955](https://www.openml.org/search?type=data&status=active&id=45955) - `card_transdata.csv`), consisting of 1,000,000 empirical card transactions with business-readable features.
 
 ### Benchmark Validation Results
 * **Empirical Dataset:** Kaggle / OpenML `card_transdata.csv` (1,000,000 records)
@@ -316,7 +316,7 @@ Judges can execute the following scenarios to test the full capability of Fraudx
 * **[Featherless.ai](https://featherless.ai/):** Serverless open-weights LLM inference platform.
 
 ### 9.4. Datasets
-* **[Kaggle / OpenML Credit Card Fraud Prediction Benchmark](https://www.openml.org/search?type=data&status=active&id=43924):** OpenML Dataset ID 43924 (`card_transdata.csv`), comprising 1,000,000 empirical transaction records with 8 human-interpretable financial features.
+* **[Kaggle Credit Card Fraud Prediction Benchmark](https://www.kaggle.com/datasets/dhanushnarayananr/credit-card-fraud):** Authored by Dhanush Narayanan R (also indexed as [OpenML Dataset ID 45955](https://www.openml.org/search?type=data&status=active&id=45955) - `Credit_Card_Fraud` / `card_transdata.csv`), comprising 1,000,000 empirical card transaction records with 8 human-interpretable financial features.
 
 ### 9.5. AI Models & Architectures
 * **XGBoost Decision Tree Ensemble:** Custom calibrated binary classifier with cost-sensitive `scale_pos_weight = 56.12`.
