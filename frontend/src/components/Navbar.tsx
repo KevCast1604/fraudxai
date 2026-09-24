@@ -27,20 +27,10 @@ export const Navbar: React.FC = () => {
 
         {/* System telemetry pills */}
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="hidden lg:flex items-center gap-2 px-2.5 py-1 rounded-md bg-zinc-100/80 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 text-[11px] font-sans text-zinc-600 dark:text-zinc-300">
-            <Cpu className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
-            <span>XGBoost Classifier • TreeSHAP Explainer</span>
-          </div>
-
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-900 dark:bg-zinc-900 border border-zinc-800 dark:border-zinc-700 text-[11px] font-sans text-zinc-100">
             <Scale className="w-3.5 h-3.5 text-amber-400" />
             <span className="hidden md:inline">Regulatory Standards:</span>
             <span className="text-zinc-300 font-semibold">CFPB & GDPR Art. 22</span>
-          </div>
-
-          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-[11px] font-sans">
-            <Activity className="w-3.5 h-3.5" />
-            <span className="font-semibold">GIBC-V2</span>
           </div>
 
           <a
