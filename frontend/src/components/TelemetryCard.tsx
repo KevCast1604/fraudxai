@@ -23,11 +23,6 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
         </div>
 
         <div className="flex items-center gap-2.5">
-          <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-sans text-zinc-400">
-            <Server className="w-3 h-3 text-zinc-400" />
-            <span className="font-semibold text-zinc-600 dark:text-zinc-300">Cluster Nominal</span>
-          </div>
-
           {onOpenSettings && (
             <button
               onClick={onOpenSettings}

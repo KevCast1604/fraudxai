@@ -18,10 +18,6 @@ export const Navbar: React.FC = () => {
               <span className="font-bold text-base tracking-tight font-mono text-zinc-950 dark:text-zinc-50">
                 Fraud<span className="text-zinc-500 dark:text-zinc-400">xAI</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-semibold tracking-wider font-sans uppercase bg-zinc-100 dark:bg-zinc-800/90 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                System Online
-              </span>
             </div>
             <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-sans tracking-tight hidden sm:block">
               Explainable Risk Intelligence & Regulatory Audit System

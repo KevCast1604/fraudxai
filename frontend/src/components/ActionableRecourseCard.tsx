@@ -76,8 +76,6 @@ export const ActionableRecourseCard: React.FC<ActionableRecourseCardProps> = ({
 
   return (
     <div className="relative rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl overflow-hidden transition-all flex flex-col justify-between">
-      {/* Top accent hairline */}
-      <div className="h-[2px] w-full bg-gradient-to-r from-emerald-500 via-sky-500 to-indigo-500" />
 
       {/* Header bar */}
       <div className="px-4 sm:px-5 py-3 border-b border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
@@ -88,12 +86,8 @@ export const ActionableRecourseCard: React.FC<ActionableRecourseCardProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono">
-                Actionable Recourse • What-If Engine
+                What-If Section
               </h3>
-              <span className="text-[9px] px-2 py-0.5 rounded-full font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 font-semibold flex items-center gap-1">
-                <Scale className="w-2.5 h-2.5 text-zinc-500" />
-                CFPB Reg B & GDPR Art. 22(3)
-              </span>
             </div>
             <p className="text-[10px] sm:text-[11px] text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
               Resolving the fundamental regulatory question:{" "}
@@ -261,7 +255,6 @@ export const ActionableRecourseCard: React.FC<ActionableRecourseCardProps> = ({
                 {/* Middle: Feature Intervention Pills (What changes) */}
                 <div>
                   <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-zinc-500 dark:text-zinc-400 mb-2 flex items-center gap-1.5">
-                    <Sparkles className="w-3 h-3 text-amber-500" />
                     Prescribed Counterfactual Interventions:
                   </div>
 
@@ -290,21 +283,21 @@ export const ActionableRecourseCard: React.FC<ActionableRecourseCardProps> = ({
                 </div>
 
                 {/* Bottom: Action description & Statutory remedy */}
-                <div className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1 border-t border-zinc-200/60 dark:border-zinc-800/60">
+                <div className="text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed pt-1 border-t border-zinc-200/60 dark:border-zinc-800/60">
                   <p>
                     <strong className="text-zinc-900 dark:text-zinc-200 font-medium">
                       Operational Action:
                     </strong>{" "}
                     {activeRecourse.description}
                   </p>
-                  <p className="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono mt-1">
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono mt-1">
                     Statutory Authority: {activeRecourse.regulatory_remedy}
                   </p>
                 </div>
 
                 {/* Interactive Apply Button */}
                 <div className="pt-2 flex items-center justify-between gap-3">
-                  <span className="text-[10px] text-zinc-400 font-sans hidden sm:inline">
+                  <span className="text-sm text-zinc-400 font-sans hidden sm:inline">
                     Click to simulate this exact recourse pathway in the workbench:
                   </span>
 

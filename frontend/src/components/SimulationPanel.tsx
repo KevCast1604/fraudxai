@@ -69,11 +69,10 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                 [01]
               </span>
               <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                 Ready-to-Use Test Scenarios
               </span>
             </div>
-            <span className="text-[10px] text-zinc-400 font-sans hidden sm:inline">
+            <span className="text-[12px] text-zinc-400 font-sans hidden sm:inline">
               Click any scenario to test the system in one click
             </span>
           </div>
