@@ -407,8 +407,6 @@ fraudxai/
 │   │       └── index.ts              # TypeScript schemas & preset definitions
 │   └── package.json                  # Node.js dependencies
 │
-├── FraudxAI_Spec.md                  # Hackathon requirements specification
-├── FraudxAI_Especificacion_Tecnica.md # Technical specification document
 ├── LICENSE                           # MIT License
 └── README.md                         # Main project documentation
 ```
