@@ -12,13 +12,13 @@ interface TelemetryCardProps {
 export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenSettings }) => {
   return (
     <div className="rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-4 sm:p-5 shadow-xl print:hidden">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2.5 border-b border-zinc-100 dark:border-zinc-800/80 gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2.5 border-b border-zinc-100 dark:border-zinc-800 gap-2">
         <div className="flex items-center gap-2.5">
-          <div className="w-6 h-6 rounded-md bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-            <Activity className="w-3.5 h-3.5 text-emerald-500" />
+          <div className="w-6 h-6 rounded-md bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-400">
+            <Activity className="w-3.5 h-3.5" />
           </div>
-          <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono">
-            System & Evaluation Telemetry
+          <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-sans">
+            Audit Pipeline Telemetry
           </h3>
         </div>
 
@@ -26,11 +26,11 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
           {onOpenSettings && (
             <button
               onClick={onOpenSettings}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 text-[11px] font-mono font-bold transition-all cursor-pointer shadow-2xs"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 text-xs font-sans font-medium transition-all cursor-pointer shadow-xs"
               title="Open AI Provider selection sidebar"
             >
               <Settings2 className="w-3.5 h-3.5 text-zinc-500" />
-              <span>Change Provider / Settings</span>
+              <span>Provider Settings</span>
             </button>
           )}
         </div>
@@ -92,12 +92,12 @@ export const TelemetryCard: React.FC<TelemetryCardProps> = ({ telemetry, onOpenS
           </span>
           <span className="mt-1 flex items-center gap-1 text-xs font-sans font-bold">
             {telemetry.fallback_triggered ? (
-              <span className="text-amber-600 dark:text-amber-400 flex items-center gap-1">
-                <AlertTriangle className="w-3.5 h-3.5" /> Failover Backup Active
+              <span className="text-amber-600 dark:text-amber-400 flex items-center gap-1 font-medium">
+                <AlertTriangle className="w-3.5 h-3.5" /> Failover Active
               </span>
             ) : (
-              <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-                <CheckCircle2 className="w-3.5 h-3.5" /> Primary Server Nominal
+              <span className="text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-medium">
+                <CheckCircle2 className="w-3.5 h-3.5" /> Operational
               </span>
             )}
           </span>

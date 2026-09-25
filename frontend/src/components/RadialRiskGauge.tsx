@@ -54,23 +54,17 @@ export const RadialRiskGauge: React.FC<RadialRiskGaugeProps> = ({ score, size = 
   const StatusIcon = severity.icon;
 
   return (
-    <div className="relative flex flex-col items-center justify-between p-4 sm:p-5 rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl overflow-hidden h-full">
-      {/* Background ambient glow matching severity */}
-      <div
-        className="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full blur-3xl opacity-15 pointer-events-none"
-        style={{ backgroundColor: severity.accentHex }}
-      />
-
-      {/* Header telemetry tag */}
-      <div className="w-full flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800/80">
+    <div className="relative flex flex-col items-center justify-between p-4 sm:p-5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm overflow-hidden h-full">
+      {/* Header tag */}
+      <div className="w-full flex items-center justify-between pb-2.5 border-b border-zinc-100 dark:border-zinc-800">
         <div className="flex items-center gap-2">
-          <div className={`w-2 h-2 rounded-full ${severity.beaconColor} shadow-xs animate-pulse`} />
-          <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-bold">
-            Fraud Risk Level
+          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: severity.accentHex }} />
+          <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-sans">
+            Risk Determination
           </span>
         </div>
-        <span className="text-[10px] font-sans text-zinc-400">
-          Real-Time Assessment
+        <span className="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400">
+          {(clampedScore * 100).toFixed(1)}%
         </span>
       </div>
 

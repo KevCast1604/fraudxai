@@ -25,17 +25,9 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle Technical Grid Background */
+/* Clean surface background */
 .tech-grid-pattern {
-  background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-@media (prefers-color-scheme: dark) {
-  .tech-grid-pattern {
-    background-image: radial-gradient(rgba(51, 65, 85, 0.35) 1px, transparent 1px);
-    background-size: 24px 24px;
-  }
+  background-color: var(--background);
 }
 
 /* Custom Technical Range Slider Styling */

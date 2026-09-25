@@ -78,29 +78,24 @@ export const ActionableRecourseCard: React.FC<ActionableRecourseCardProps> = ({
     <div className="relative rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl shadow-xl overflow-hidden transition-all flex flex-col justify-between">
 
       {/* Header bar */}
-      <div className="px-4 sm:px-5 py-3 border-b border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+      <div className="px-4 sm:px-5 py-3.5 border-b border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/30">
-            <GitCompare className="w-3.5 h-3.5" />
+          <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center border border-zinc-200 dark:border-zinc-700">
+            <GitCompare className="w-4 h-4" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono">
-                What-If Section
-              </h3>
-            </div>
-            <p className="text-[10px] sm:text-[11px] text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
-              Resolving the fundamental regulatory question:{" "}
-              <em className="text-zinc-700 dark:text-zinc-300 font-medium not-italic">
-                &ldquo;What exact changes would turn this adverse block into an approval?&rdquo;
-              </em>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-sans">
+              Actionable Recourse
+            </h3>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
+              Identifies the minimum required modifications to reduce risk and qualify for approval.
             </p>
           </div>
         </div>
 
         {recourses.length > 0 && !isLowRisk && (
-          <div className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800/60 px-2.5 py-1 rounded-md border border-zinc-200 dark:border-zinc-700/60">
-            {recourses.length} {recourses.length === 1 ? "Path Identified" : "Remediation Paths"}
+          <div className="text-xs font-sans text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 rounded-md border border-zinc-200 dark:border-zinc-700">
+            {recourses.length} {recourses.length === 1 ? "Path Available" : "Remediation Paths"}
           </div>
         )}
       </div>
@@ -110,22 +105,22 @@ export const ActionableRecourseCard: React.FC<ActionableRecourseCardProps> = ({
         {isLowRisk ? (
           <div className="p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-500/10 flex items-start gap-3.5 text-zinc-800 dark:text-zinc-200">
             <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
-              <ShieldCheck className="w-5 h-5" />
+              <ShieldCheck className="w-4 h-4" />
             </div>
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold font-mono uppercase tracking-wider text-emerald-700 dark:text-emerald-300">
-                  Optimal Decision State: Auto-Approved
+                <span className="text-xs font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 font-sans">
+                  Transaction Approved
                 </span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-mono font-semibold">
+                <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-medium">
                   Risk &lt; 35%
                 </span>
               </div>
               <p className="text-xs text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed">
                 The current transaction risk score ({(currentRiskScore * 100).toFixed(1)}%) conforms to standard portfolio risk tolerance. All regulatory security baselines under CFPB Reg B are met, and no adverse action remedies are legally required.
               </p>
-              <div className="text-[11px] text-zinc-500 dark:text-zinc-400 pt-1 font-mono">
-                Tip: Simulate elevated risk scenarios using the Benchmark Presets to explore counterfactual recourse pathways.
+              <div className="text-xs text-zinc-500 dark:text-zinc-400 pt-1 font-sans">
+                Tip: Select an elevated risk scenario in the simulator to view counterfactual remediation pathways.
               </div>
             </div>
           </div>

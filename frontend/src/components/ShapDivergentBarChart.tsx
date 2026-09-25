@@ -28,53 +28,53 @@ export const ShapDivergentBarChart: React.FC<ShapDivergentBarChartProps> = ({
     <div className="rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl p-4 sm:p-5 shadow-xl flex flex-col justify-between h-full min-h-0">
       {/* Top Section: Header + Scale Axis (shrink-0) */}
       <div className="shrink-0">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800/80 gap-2.5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800 gap-2.5">
           <div>
             <div className="flex items-center gap-2">
               <ArrowLeftRight className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
-              <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono">
-                Why did the system make this decision? (Key Factors)
+              <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-sans">
+                Key Decision Factors
               </h3>
             </div>
-            <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
-              Breakdown of purchase details that either raised alerts or confirmed the transaction was authentic.
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
+              Specific transaction attributes that contributed toward approval or triggered elevated risk.
             </p>
           </div>
 
           {/* Legend */}
-          <div className="flex items-center gap-2.5 text-[10px] sm:text-[11px] font-sans shrink-0">
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
-              <TrendingDown className="w-3 h-3" />
-              <span>Reduces Risk (Safe)</span>
+          <div className="flex items-center gap-2.5 text-xs font-sans shrink-0">
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 font-medium">
+              <TrendingDown className="w-3.5 h-3.5" />
+              <span>Reduces Risk</span>
             </div>
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400">
-              <TrendingUp className="w-3 h-3" />
-              <span>Increases Risk (Suspicious)</span>
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-400 font-medium">
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>Increases Risk</span>
             </div>
           </div>
         </div>
 
         {/* Scale Axis Header */}
-        <div className="grid grid-cols-12 gap-2 text-[10px] font-sans text-zinc-400 pt-2.5 pb-2 border-b border-zinc-100 dark:border-zinc-800/60 items-center">
-          <div className="col-span-12 sm:col-span-5 uppercase tracking-wider font-semibold">
-            Factor & Observed Value
+        <div className="grid grid-cols-12 gap-2 text-xs font-sans text-zinc-400 pt-2.5 pb-2 border-b border-zinc-100 dark:border-zinc-800/60 items-center">
+          <div className="col-span-12 sm:col-span-5 uppercase tracking-wider font-semibold text-[11px]">
+            Attribute & Value
           </div>
-          <div className="col-span-8 sm:col-span-5 grid grid-cols-2 text-center">
-            <div className="text-right pr-2 text-emerald-600/80 dark:text-emerald-400/80 font-mono">
-              ← -{maxAbsShap.toFixed(1)} (Safe)
+          <div className="col-span-8 sm:col-span-5 grid grid-cols-2 text-center text-[11px]">
+            <div className="text-right pr-2 text-emerald-600/90 dark:text-emerald-400/90 font-mono">
+              ← Mitigating
             </div>
-            <div className="text-left pl-2 text-rose-600/80 dark:text-rose-400/80 font-mono">
-              +{maxAbsShap.toFixed(1)} (Risk) →
+            <div className="text-left pl-2 text-rose-600/90 dark:text-rose-400/90 font-mono">
+              Aggravating →
             </div>
           </div>
-          <div className="col-span-4 sm:col-span-2 text-right uppercase tracking-wider font-semibold">
+          <div className="col-span-4 sm:col-span-2 text-right uppercase tracking-wider font-semibold text-[11px]">
             Impact
           </div>
         </div>
       </div>
 
-      {/* Middle Section: Scrollable Feature Attribution Rows with Dedicated Scrollbar */}
-      <div className="flex-1 min-h-0 overflow-y-auto divide-y divide-zinc-100 dark:divide-zinc-800/50 my-1 pr-1.5 max-h-[380px] lg:max-h-[420px] xl:max-h-[480px]">
+      {/* Middle Section: Feature Attribution Rows without nested scroll trap */}
+      <div className="flex-1 min-h-0 divide-y divide-zinc-100 dark:divide-zinc-800/50 my-1">
         {sortedFactors.map((item) => {
           const isPositive = item.shap_value >= 0;
           const barWidthPercent = (Math.abs(item.shap_value) / maxAbsShap) * 100;

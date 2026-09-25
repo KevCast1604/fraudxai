@@ -29,22 +29,17 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
       <div className="h-[1px] w-full bg-zinc-200 dark:bg-zinc-800" />
 
       {/* Control Panel Header */}
-      <div className="px-4 sm:px-5 py-3 border-b border-zinc-100 dark:border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+      <div className="px-4 sm:px-5 py-3.5 border-b border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center border border-zinc-200 dark:border-zinc-700">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-zinc-700 dark:text-zinc-300" />
+          <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300">
+            <SlidersHorizontal className="w-4 h-4" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono">
-                Transaction Simulator & Risk Assessment
-              </h2>
-              <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 font-semibold">
-                LIVE
-              </span>
-            </div>
-            <p className="text-[10px] sm:text-[11px] text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
-              Change transaction details to see in real-time how the fraud prevention system responds.
+            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-sans">
+              Transaction Simulator
+            </h2>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
+              Simulate transaction variables or load predefined cases to evaluate automated decisions.
             </p>
           </div>
         </div>
@@ -52,28 +47,23 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
         <button
           type="button"
           onClick={onReset}
-          className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-zinc-50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 text-xs font-sans transition-all hover:border-zinc-300 dark:hover:border-zinc-600 cursor-pointer shadow-2xs"
-          title="Reset all values to default baseline"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 text-xs font-sans transition-all cursor-pointer shadow-xs"
+          title="Reset all values to baseline"
         >
           <RotateCcw className="w-3.5 h-3.5" />
-          <span>Reset Values</span>
+          <span>Reset</span>
         </button>
       </div>
 
-      <div className="p-4 sm:p-5 space-y-4">
+      <div className="p-4 sm:p-5 space-y-5">
         {/* SECTION 1: BENCHMARK PRESETS */}
         <div>
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold text-zinc-400 tracking-wider">
-                [01]
-              </span>
-              <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono flex items-center gap-1.5">
-                Ready-to-Use Test Scenarios
-              </span>
-            </div>
-            <span className="text-[12px] text-zinc-400 font-sans hidden sm:inline">
-              Click any scenario to test the system in one click
+          <div className="flex items-center justify-between mb-2.5">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-sans">
+              Predefined Scenarios
+            </h3>
+            <span className="text-xs text-zinc-400 font-sans hidden sm:inline">
+              Select a case to auto-populate features
             </span>
           </div>
 
@@ -95,10 +85,10 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                   type="button"
                   onClick={() => onApplyPreset(preset)}
                   title={`${preset.name}: ${preset.description}`}
-                  className={`group relative text-left p-2.5 rounded-xl border transition-all flex flex-col justify-between cursor-pointer ${
+                  className={`group relative text-left p-3 rounded-xl border transition-all flex flex-col justify-between cursor-pointer ${
                     isSelected
-                      ? "border-zinc-900 dark:border-zinc-100 bg-zinc-100/90 dark:bg-zinc-800/80 shadow-sm ring-1 ring-zinc-900/10 dark:ring-zinc-100/10"
-                      : "border-zinc-200 dark:border-zinc-800/90 bg-zinc-50/60 dark:bg-zinc-950/40 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-100/60 dark:hover:bg-zinc-900/60"
+                      ? "border-zinc-900 dark:border-zinc-100 bg-zinc-100/90 dark:bg-zinc-800/80 shadow-xs"
+                      : "border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/40 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50"
                   }`}
                 >
                   <div>
@@ -108,19 +98,19 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                         {preset.name}
                       </span>
                       {isSelected && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 dark:bg-zinc-100 shadow-xs shrink-0 mt-1" />
+                        <span className="w-2 h-2 rounded-full bg-zinc-900 dark:bg-zinc-100 shrink-0 mt-1" />
                       )}
                     </div>
 
-                    <p className="text-[11px] text-zinc-600 dark:text-zinc-300 leading-relaxed mt-1">
+                    <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mt-1">
                       {preset.description}
                     </p>
                   </div>
 
                   {/* Bottom Row: Tier Badge + Metric */}
-                  <div className="mt-2.5 pt-2 border-t border-zinc-200/50 dark:border-zinc-800/60 flex items-center justify-between">
+                  <div className="mt-2.5 pt-2 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between">
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold font-mono tracking-tight border ${
+                      className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold tracking-tight border ${
                         isCritical
                           ? "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20"
                           : isReview
@@ -131,7 +121,7 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
                       {friendlyBadge}
                     </span>
 
-                    <span className="text-[11px] font-mono font-semibold text-zinc-700 dark:text-zinc-300">
+                    <span className="text-xs font-mono font-medium text-zinc-700 dark:text-zinc-300">
                       ${preset.features.amount.toFixed(0)} USD
                     </span>
                   </div>
@@ -141,19 +131,14 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
           </div>
         </div>
 
-        {/* SECTION 2: TRANSACTION DETAILS */}
-        <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/80">
-          <div className="flex items-center justify-between mb-2.5">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold text-zinc-400 tracking-wider">
-                [02]
-              </span>
-              <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono">
-                Transaction Details
-              </span>
-            </div>
-            <span className="text-[10px] text-zinc-400 font-sans">
-              Drag sliders to adjust amounts and distances
+        {/* SECTION 2: TRANSACTION PARAMETERS */}
+        <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-sans">
+              Transaction Parameters
+            </h3>
+            <span className="text-xs text-zinc-400 font-sans">
+              Adjust transaction values
             </span>
           </div>
 
@@ -268,19 +253,14 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
           </div>
         </div>
 
-        {/* SECTION 3: CARD SECURITY & CHANNEL */}
-        <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/80">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono font-bold text-zinc-400 tracking-wider">
-                [03]
-              </span>
-              <span className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-mono">
-                Card Security & Purchase Channel
-              </span>
-            </div>
-            <span className="text-[10px] text-zinc-400 font-sans">
-              Click any card to turn On or Off (Yes / No)
+        {/* SECTION 3: SECURITY & AUTHENTICATION FACTORS */}
+        <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800">
+          <div className="flex items-center justify-between mb-2.5">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 font-sans">
+              Security & Verification Factors
+            </h3>
+            <span className="text-xs text-zinc-400 font-sans">
+              Toggle card credentials
             </span>
           </div>
 
@@ -408,18 +388,18 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
         </div>
 
         {/* CTA Trigger Bar */}
-        <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-2.5">
-          <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-sans text-zinc-500 dark:text-zinc-400">
+        <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="flex items-center gap-2 text-xs font-sans text-zinc-500 dark:text-zinc-400">
             {isAnalyzing ? (
               <div className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 font-medium">
-                <span className="w-2 h-2 rounded-full bg-zinc-500 animate-ping" />
-                <span>Running XGBoost + SHAP TreeExplainer & drafting legal compliance memo...</span>
+                <RefreshCw className="w-3.5 h-3.5 animate-spin text-zinc-600 dark:text-zinc-400" />
+                <span>Evaluating risk factors and drafting audit explanation...</span>
               </div>
             ) : (
-              <>
+              <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span>Ready to evaluate transaction risk and draft the explanation report.</span>
-              </>
+                <span>Ready for assessment.</span>
+              </div>
             )}
           </div>
 
@@ -427,21 +407,21 @@ export const SimulationPanel: React.FC<SimulationPanelProps> = ({
             type="button"
             onClick={onAnalyze}
             disabled={isAnalyzing}
-            className={`w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2 rounded-xl font-sans font-bold text-xs shadow-lg transition-all cursor-pointer border ${
+            className={`w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-sans font-semibold text-xs transition-all cursor-pointer border ${
               isAnalyzing
-                ? "bg-zinc-800 text-white border-zinc-700 animate-pulse"
-                : "bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-950 shadow-zinc-950/10 hover:scale-[1.02] active:scale-[0.98] border-zinc-800 dark:border-zinc-200"
+                ? "bg-zinc-800 text-white border-zinc-700 opacity-80"
+                : "bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 shadow-sm border-transparent"
             }`}
           >
             {isAnalyzing ? (
               <>
-                <RefreshCw className="w-3.5 h-3.5 animate-spin text-white" />
-                <span>Evaluating Risk & Drafting Memo...</span>
+                <RefreshCw className="w-3.5 h-3.5 animate-spin text-white dark:text-zinc-900" />
+                <span>Evaluating...</span>
               </>
             ) : (
               <>
                 <Play className="w-3 h-3 fill-current text-zinc-100 dark:text-zinc-900" />
-                <span>Analyze Transaction Risk</span>
+                <span>Run Risk Analysis</span>
               </>
             )}
           </button>

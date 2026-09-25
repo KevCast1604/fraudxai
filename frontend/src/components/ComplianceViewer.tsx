@@ -105,19 +105,17 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
   return (
     <div className="w-full rounded-2xl border border-zinc-200/90 dark:border-zinc-800/80 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transition-all print:border-none print:shadow-none print:rounded-none print:bg-white print:overflow-visible print:w-full print:p-0 print:m-0">
       {/* Top Action Bar: Sticky during scroll, hidden during print */}
-      <div className="sticky top-0 z-20 flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-5 border-b border-zinc-100 dark:border-zinc-800/80 gap-3 print:hidden bg-zinc-50/95 dark:bg-zinc-950/90 backdrop-blur-md shadow-xs">
+      <div className="sticky top-0 z-20 flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-5 border-b border-zinc-100 dark:border-zinc-800 gap-3 print:hidden bg-zinc-50/95 dark:bg-zinc-950/90 backdrop-blur-md">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-zinc-900 dark:bg-zinc-800 flex items-center justify-center border border-zinc-700/60">
-            <FileCheck2 className="w-4 h-4 text-zinc-100 dark:text-zinc-100" />
+            <FileCheck2 className="w-4 h-4 text-zinc-100" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-mono">
-                Official Regulatory Compliance & Fraud Assessment Report
-              </h2>
-            </div>
-            <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
-              Automated audit record complying with consumer fair lending and banking transparency directives (CFPB, GDPR, and Fed SR 26-2).
+            <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100 font-sans">
+              Compliance & Audit Report
+            </h2>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 font-sans mt-0.5">
+              Statutory memorandum documenting principal reasons and regulatory disclosures (CFPB & GDPR Art. 22).
             </p>
           </div>
         </div>
@@ -127,18 +125,18 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
           <button
             type="button"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700/70 transition-all cursor-pointer shadow-2xs"
-            title={isExpanded ? "Switch to compact scrollable docket view" : "Expand to full document length"}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-all cursor-pointer shadow-xs"
+            title={isExpanded ? "Switch to compact view" : "Expand to full document length"}
           >
             {isExpanded ? (
               <>
                 <Minimize2 className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
-                <span>Compact View</span>
+                <span>Compact</span>
               </>
             ) : (
               <>
                 <Maximize2 className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
-                <span>Expand View</span>
+                <span>Expand</span>
               </>
             )}
           </button>
@@ -147,7 +145,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
           <button
             type="button"
             onClick={handleCopy}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700/70 transition-all cursor-pointer shadow-2xs"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-sans font-medium rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-all cursor-pointer shadow-xs"
           >
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
             <span>{copied ? "Copied" : "Copy"}</span>
@@ -157,10 +155,10 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
           <button
             type="button"
             onClick={handlePrint}
-            className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-sans font-bold rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 transition-all shadow-md cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-sans font-semibold rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 transition-all shadow-sm cursor-pointer"
           >
             <Printer className="w-3.5 h-3.5" />
-            <span>Print / Save as PDF</span>
+            <span>Export PDF</span>
           </button>
         </div>
       </div>
@@ -168,7 +166,7 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
       {/* Scrollable Container with Custom Viewport Height */}
       <div
         className={`transition-all duration-300 ${
-          isExpanded ? "max-h-none" : "max-h-[380px] overflow-y-auto"
+          isExpanded ? "max-h-none" : "max-h-[480px] overflow-y-auto"
         } print:max-h-none print:overflow-visible print:w-full print:p-0 print:m-0`}
       >
 
@@ -177,33 +175,33 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
         id="compliance-document"
         className="p-6 sm:p-8 text-zinc-900 dark:text-zinc-100 print:text-black print:dark:text-black print:w-full print:max-w-none print:bg-white"
       >
-        {/* Security Classification Ribbon */}
-        <div className="memo-avoid-break mb-6 pb-2 border-b border-zinc-200 dark:border-zinc-800 print:border-zinc-300 flex justify-between items-center text-[10px] font-sans tracking-wider text-zinc-400 print:text-zinc-500 uppercase">
-          <span>Financial Security & Compliance Operations</span>
-          <span className="font-bold text-zinc-700 dark:text-zinc-300 print:text-black">
-            Official Audit Record
+        {/* Document Classification Header */}
+        <div className="memo-avoid-break mb-6 pb-2 border-b border-zinc-200 dark:border-zinc-800 print:border-zinc-300 flex justify-between items-center text-xs font-sans text-zinc-500 dark:text-zinc-400 print:text-zinc-500">
+          <span>Compliance & Risk Operations</span>
+          <span className="font-semibold text-zinc-800 dark:text-zinc-200 print:text-black">
+            Audit Documentation
           </span>
         </div>
 
         {/* Institutional Letterhead */}
-        <header className="memo-avoid-break pb-6 mb-8 border-b-2 border-zinc-900 dark:border-zinc-700 print:border-black flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+        <header className="memo-avoid-break pb-6 mb-8 border-b border-zinc-200 dark:border-zinc-700 print:border-black flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
           <div className="space-y-1">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded bg-zinc-950 dark:bg-zinc-900 border border-zinc-800 flex items-center justify-center print:border-black">
-                <ShieldAlert className="w-5 h-5 text-zinc-100 dark:text-zinc-100 print:text-black" />
+              <div className="w-9 h-9 rounded-lg bg-zinc-950 dark:bg-zinc-800 border border-zinc-800 flex items-center justify-center print:border-black">
+                <ShieldAlert className="w-5 h-5 text-zinc-100 print:text-black" />
               </div>
               <div>
-                <h1 className="text-base font-extrabold tracking-tight uppercase font-sans text-zinc-950 dark:text-zinc-50 print:text-black">
-                  Official Fraud Assessment & Adverse Action Report
+                <h1 className="text-base font-bold tracking-tight uppercase font-sans text-zinc-950 dark:text-zinc-50 print:text-black">
+                  Fraud Assessment & Adverse Action Report
                 </h1>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400 print:text-zinc-600 font-sans mt-0.5">
-                  Transparent machine learning evaluation documenting principal factual reasons
+                  Statutory evaluation documenting principal factual reasons under fair lending rules
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Folio Metadata Plaque */}
+          {/* Metadata Card */}
           <div className="p-3.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-950/40 print:border-zinc-300 print:bg-white text-xs font-sans space-y-1.5 sm:text-right min-w-[240px]">
             <div className="flex justify-between sm:justify-end gap-3">
               <span className="text-zinc-400 font-bold uppercase text-[10px]">Tracking ID:</span>
@@ -274,23 +272,23 @@ export const ComplianceViewer: React.FC<ComplianceViewerProps> = ({
           </ReactMarkdown>
         </div>
 
-        {/* Legal Attestation & Verification Sign-off Footer */}
-        <footer className="memo-avoid-break mt-12 pt-8 border-t-2 border-zinc-200 dark:border-zinc-800 print:border-zinc-400 grid grid-cols-1 sm:grid-cols-2 gap-8 text-xs">
+        {/* Audit Verification Sign-off Footer */}
+        <footer className="memo-avoid-break mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800 print:border-zinc-400 grid grid-cols-1 sm:grid-cols-2 gap-8 text-xs">
           <div>
-            <div className="flex items-center gap-1.5 text-zinc-400 print:text-zinc-500 font-sans text-[10px] uppercase tracking-wider">
-              <Award className="w-3.5 h-3.5 text-zinc-500 print:text-zinc-700" />
-              <span>Algorithmic Attestation & Model Governance (SR 26-2 & GDPR Art. 22)</span>
+            <div className="flex items-center gap-1.5 text-zinc-500 font-sans text-xs uppercase tracking-wider">
+              <Award className="w-3.5 h-3.5 text-zinc-500" />
+              <span>Model Governance & Compliance (SR 26-2 & GDPR Art. 22)</span>
             </div>
             <p className="font-semibold text-zinc-800 dark:text-zinc-200 print:text-black mt-1">
-              Generated by FraudxAI Resilient Risk Governance Engine
+              Generated by FraudxAI Risk Platform
             </p>
-            <p className="text-zinc-400 print:text-zinc-500 text-[10px] font-sans mt-0.5">
-              Model: XGBoost-Fraud-v1.0 (ROC-AUC: 0.9445) • Explainability: Mathematical SHAP decomposition
+            <p className="text-zinc-500 text-xs font-sans mt-0.5">
+              Model: XGBoost-Fraud-v1.0 (ROC-AUC: 94.4%) • Local Attribution: SHAP
             </p>
           </div>
-          <div className="flex flex-col justify-end sm:text-right text-[10px] font-mono text-zinc-400 print:text-zinc-500">
+          <div className="flex flex-col justify-end sm:text-right text-xs font-mono text-zinc-500">
             <div>Docket #{auditId}</div>
-            <div>Official Statutory Record • All Rights Reserved</div>
+            <div>Statutory Audit Record • Confidential</div>
           </div>
         </footer>
       </article>

@@ -39,20 +39,20 @@ const ENGINE_OPTIONS: EngineOption[] = [
   {
     id: "groq",
     name: "Groq Cloud LPU",
-    badge: "Ultra-Fast Ingestion",
+    badge: "Low Latency",
     badgeColor: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/30",
     model: "qwen/qwen3.8-27b",
     speed: "~1.5 - 2.8s",
-    description: "Hardware-accelerated LPUs (Language Processing Units) optimized for near-instant compliance memo generation.",
+    description: "Hardware-accelerated LPUs optimized for near-instant explanation memo generation.",
   },
   {
     id: "offline",
     name: "Deterministic Offline",
-    badge: "Infallible Safety Net",
+    badge: "Local Fallback",
     badgeColor: "bg-zinc-500/10 text-zinc-700 dark:text-zinc-300 border-zinc-500/30",
     model: "rule_based_v1.0",
     speed: "< 5ms",
-    description: "Air-gapped statutory rule engine that guarantees 100% availability even during total cloud network disconnects.",
+    description: "Deterministic rule engine ensuring availability even when cloud providers are disconnected.",
   },
 ];
 

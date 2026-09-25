@@ -176,34 +176,23 @@ export const HelpModal: React.FC = () => {
                     </span>
                   </h4>
                   <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
-                    The audit telemetry bar displays the active provider (<strong>Groq</strong> for ultra-fast &lt;3s inference, <strong>Featherless.ai</strong>, <strong>Adaption Labs</strong>, or <strong>Deterministic Offline Engine</strong>) with automatic failover to guarantee zero downtime.
+                    The audit telemetry bar displays the active provider (<strong>Groq</strong>, <strong>Featherless.ai</strong>, or <strong>Local Deterministic Engine</strong>) with automatic failover to guarantee high availability.
                   </p>
-                  <div className="pt-1">
-                    <a
-                      href="https://my-app-1ombyk.adaptionlabs.app/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-950 dark:hover:text-white underline transition-colors"
-                    >
-                      <span>Open Adaption Labs Ops Portal (Score 10/10)</span>
-                      <span>↗</span>
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>
 
             {/* Modal Footer */}
             <div className="flex items-center justify-between px-6 py-3.5 border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/60">
-              <span className="text-[11px] font-mono text-zinc-400 flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" /> GIBC V2 Hackathon • Track 02 (Finance)
+              <span className="text-xs text-zinc-500 font-sans">
+                FraudxAI Institutional Platform
               </span>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
                 className="px-4 py-1.5 rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-semibold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors cursor-pointer"
               >
-                Got it, close
+                Close
               </button>
             </div>
           </div>
