@@ -64,10 +64,9 @@ Formally formatted compliance audit memo satisfying CFPB Reg B § 1002.9 and Fin
 
 ## 3. AdaptionLabs Integration
 
-FraudxAI leverages **[Adaption Labs](https://adaptionlabs.ai/)** as an advanced AI orchestration and adaptive inference provider for generating regulatory compliance memorandums and evaluating fine-tuned models.
+FraudxAI leverages **AdaptionLabs** as an advanced AI orchestration and adaptive inference provider for generating regulatory compliance memorandums.
 
-* 🌐 **Official Platform:** [https://adaptionlabs.ai/](https://adaptionlabs.ai/)
-* ⚡ **Inference Endpoint:** `https://api.adaption.ai/v1`
+* 🚀 **AdaptionLabs Live App:** [https://my-app-1ombyk.adaptionlabs.app/](https://my-app-1ombyk.adaptionlabs.app/)
 
 ### How AdaptionLabs Powers FraudxAI
 1. **Adaptive LLM Routing & Serving:** AdaptionLabs delivers low-latency model execution optimized for complex structured prompt templates containing SHAP mathematical attribution vectors.
