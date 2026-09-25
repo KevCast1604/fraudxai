@@ -37,30 +37,21 @@ Modern machine learning fraud classifiers (Gradient Boosted Trees, Deep Neural N
 
 Here is a visual overview of the FraudxAI institutional risk platform:
 
-### 2.1. Master Risk Assessment Cockpit & Radial Gauge
-Interactive transaction simulator featuring 8 transparent financial parameters, 4 attack presets, real-time probability gauge, and official decision plaque.
+### 2.1. Master Risk Assessment Cockpit & SHAP Explainability Matrix
+Interactive transaction simulation cockpit featuring 8 transparent financial parameters, real-time probability gauge, official decision plaque, and sub-5ms SHAP local feature attribution (red bars for risk drivers, green for mitigating factors).
 
-![Master Risk Cockpit](./docs/images/dashboard1.jpg)
-
----
-
-### 2.2. Mathematical Explainability Quadrant (SHAP Divergent Matrix)
-Sub-5ms local attribution decomposing risk into exact additive contributions. Red bars highlight risk drivers; green bars highlight mitigating factors.
-
-<!-- [IMAGE PLACEHOLDER: SHAP Divergent Matrix] -->
-> 📸 **(Here goes image: SHAP Local Attribution Waterfall & Divergent Bar Chart showing exact feature contributions)**
-<!-- ![SHAP Divergent Matrix](./docs/images/02_shap_divergent.png) -->
+![Master Risk Assessment Cockpit and SHAP Matrix](./docs/images/dashboard1.jpg)
 
 ---
 
-### 2.3. Actionable Counterfactual Recourse Engine
+### 2.2. Actionable Counterfactual Recourse Engine
 Algorithmic guidance providing cardholders and compliance officers with verified remediation paths (e.g., verifying physical chip and PIN) to remediate false positives.
 
 ![Actionable Counterfactual Recourse](./docs/images/what-if.jpg)
 
 ---
 
-### 2.4. Statutory Compliance Memorandum & Vector PDF Export
+### 2.3. Statutory Compliance Memorandum & Vector PDF Export
 Formally formatted compliance audit memo satisfying CFPB Reg B § 1002.9 and FinCEN SAR standards, exportable as an institutional 300+ DPI vector PDF.
 
 ![Statutory Compliance Memorandum](./docs/images/memo-audit.jpg)
@@ -71,20 +62,12 @@ Formally formatted compliance audit memo satisfying CFPB Reg B § 1002.9 and Fin
 
 ---
 
-### 2.5. Model Rigor & Validation Curves
-Empirical training and validation metrics showing ROC-AUC and Precision-Recall evaluation curves.
-
-<!-- [IMAGE PLACEHOLDER: Model Curves] -->
-> 📸 **(Here goes image: XGBoost ROC-AUC Curve (0.9445) and Precision-Recall Curve on stratified test benchmark)**
-<!-- ![Model Evaluation](./docs/images/05_model_evaluation.png) -->
-
----
-
 ## 3. AdaptionLabs Integration
 
-FraudxAI leverages **AdaptionLabs** as an advanced AI orchestration and adaptive inference provider for generating regulatory compliance memorandums.
+FraudxAI leverages **[Adaption Labs](https://adaptionlabs.ai/)** as an advanced AI orchestration and adaptive inference provider for generating regulatory compliance memorandums and evaluating fine-tuned models.
 
-* **Platform Link:** [https://adaptionlabs.ai/](https://adaptionlabs.ai/)
+* 🌐 **Official Platform:** [https://adaptionlabs.ai/](https://adaptionlabs.ai/)
+* ⚡ **Inference Endpoint:** `https://api.adaption.ai/v1`
 
 ### How AdaptionLabs Powers FraudxAI
 1. **Adaptive LLM Routing & Serving:** AdaptionLabs delivers low-latency model execution optimized for complex structured prompt templates containing SHAP mathematical attribution vectors.
@@ -345,7 +328,7 @@ Judges can execute the following scenarios to test the full capability of Fraudx
 
 ### Project Team
 * **Kevin Alexander Castañeda Llanos** — Lead Machine Learning Engineer & Full-Stack Architect  
-  * *Devpost:* [KevCast1604](https://devpost.com/KevCast1604)  
+  * *Devpost:* [KevCast1604](https://devpost.com/kevin-castaneda-llanos?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav)  
   * *GitHub:* [@KevCast1604](https://github.com/KevCast1604)
 
 > [!IMPORTANT]
