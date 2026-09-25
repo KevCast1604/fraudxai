@@ -40,9 +40,7 @@ Here is a visual overview of the FraudxAI institutional risk platform:
 ### 2.1. Master Risk Assessment Cockpit & Radial Gauge
 Interactive transaction simulator featuring 8 transparent financial parameters, 4 attack presets, real-time probability gauge, and official decision plaque.
 
-<!-- [IMAGE PLACEHOLDER: Master Risk Cockpit] -->
-> 📸 **(Here goes image: FraudxAI Master Cockpit — Interactive sliders, radial risk speedometer, and verified governance decision card)**
-<!-- ![Master Cockpit](./docs/images/01_master_cockpit.png) -->
+![Master Risk Cockpit](./docs/images/dashboard1.jpg)
 
 ---
 
@@ -58,18 +56,18 @@ Sub-5ms local attribution decomposing risk into exact additive contributions. Re
 ### 2.3. Actionable Counterfactual Recourse Engine
 Algorithmic guidance providing cardholders and compliance officers with verified remediation paths (e.g., verifying physical chip and PIN) to remediate false positives.
 
-<!-- [IMAGE PLACEHOLDER: Actionable Recourse Cards] -->
-> 📸 **(Here goes image: Actionable Counterfactual Recourse Cards demonstrating simulated risk score drop from 94% to 8%)**
-<!-- ![Actionable Recourse](./docs/images/03_actionable_recourse.png) -->
+![Actionable Counterfactual Recourse](./docs/images/what-if.jpg)
 
 ---
 
 ### 2.4. Statutory Compliance Memorandum & Vector PDF Export
 Formally formatted compliance audit memo satisfying CFPB Reg B § 1002.9 and FinCEN SAR standards, exportable as an institutional 300+ DPI vector PDF.
 
-<!-- [IMAGE PLACEHOLDER: Compliance Memo & PDF Export] -->
-> 📸 **(Here goes image: Generated Statutory Compliance Memorandum and Vector PDF Export preview)**
-<!-- ![Compliance Memorandum](./docs/images/04_compliance_memo.png) -->
+![Statutory Compliance Memorandum](./docs/images/memo-audit.jpg)
+
+<br/>
+
+![Vector PDF Export Preview](./docs/images/memo-pdf.jpg)
 
 ---
 
@@ -93,13 +91,7 @@ FraudxAI leverages **AdaptionLabs** as an advanced AI orchestration and adaptive
 2. **Deterministic Compliance Guardrails:** Enables reproducible token outputs adhering strictly to statutory legal frameworks (ECOA Reg B, FinCEN SAR narratives, and GDPR Article 22).
 3. **Telemetry & Execution Monitoring:** Captures millisecond-level inference timings and fallback triggers within FraudxAI's telemetry monitoring system.
 
-<!-- [IMAGE PLACEHOLDER: AdaptionLabs Dashboard] -->
-> 📸 **(Here goes image: AdaptionLabs Platform Dashboard & Model Pipeline Configuration)**
-<!-- ![AdaptionLabs Dashboard](./docs/images/06_adaptionlabs_dashboard.png) -->
-
-<!-- [IMAGE PLACEHOLDER: AdaptionLabs Telemetry] -->
-> 📸 **(Here goes image: AdaptionLabs Real-time LLM Inference Telemetry & Token Latency)**
-<!-- ![AdaptionLabs Telemetry](./docs/images/07_adaptionlabs_telemetry.png) -->
+![AdaptionLabs Platform Integration](./docs/images/adaptionlabs.jpg)
 
 ---
 
