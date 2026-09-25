@@ -1,6 +1,6 @@
 # FraudxAI: Explainable AI for Risk & Compliance
 
-[![GIBC V2 Track 02](https://img.shields.io/badge/GIBC%20V2-Track%2002%3A%20Applied%20(Finance)-4F46E5.svg?style=for-the-badge)](https://devpost.com)
+[![GIBC V2 Track 02](https://img.shields.io/badge/GIBC%20V2-Track%2002%3A%20Applied%20(Finance)-4F46E5.svg?style=for-the-badge)](https://gibc-v2.devpost.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-3776AB.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.141-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
@@ -42,6 +42,7 @@ Interactive transaction simulator featuring 8 transparent financial parameters, 
 
 <!-- [IMAGE PLACEHOLDER: Master Risk Cockpit] -->
 > 📸 **(Here goes image: FraudxAI Master Cockpit — Interactive sliders, radial risk speedometer, and verified governance decision card)**
+<!-- ![Master Cockpit](./docs/images/01_master_cockpit.png) -->
 
 ---
 
@@ -50,6 +51,7 @@ Sub-5ms local attribution decomposing risk into exact additive contributions. Re
 
 <!-- [IMAGE PLACEHOLDER: SHAP Divergent Matrix] -->
 > 📸 **(Here goes image: SHAP Local Attribution Waterfall & Divergent Bar Chart showing exact feature contributions)**
+<!-- ![SHAP Divergent Matrix](./docs/images/02_shap_divergent.png) -->
 
 ---
 
@@ -58,6 +60,7 @@ Algorithmic guidance providing cardholders and compliance officers with verified
 
 <!-- [IMAGE PLACEHOLDER: Actionable Recourse Cards] -->
 > 📸 **(Here goes image: Actionable Counterfactual Recourse Cards demonstrating simulated risk score drop from 94% to 8%)**
+<!-- ![Actionable Recourse](./docs/images/03_actionable_recourse.png) -->
 
 ---
 
@@ -66,6 +69,7 @@ Formally formatted compliance audit memo satisfying CFPB Reg B § 1002.9 and Fin
 
 <!-- [IMAGE PLACEHOLDER: Compliance Memo & PDF Export] -->
 > 📸 **(Here goes image: Generated Statutory Compliance Memorandum and Vector PDF Export preview)**
+<!-- ![Compliance Memorandum](./docs/images/04_compliance_memo.png) -->
 
 ---
 
@@ -74,6 +78,7 @@ Empirical training and validation metrics showing ROC-AUC and Precision-Recall e
 
 <!-- [IMAGE PLACEHOLDER: Model Curves] -->
 > 📸 **(Here goes image: XGBoost ROC-AUC Curve (0.9445) and Precision-Recall Curve on stratified test benchmark)**
+<!-- ![Model Evaluation](./docs/images/05_model_evaluation.png) -->
 
 ---
 
@@ -90,9 +95,11 @@ FraudxAI leverages **AdaptionLabs** as an advanced AI orchestration and adaptive
 
 <!-- [IMAGE PLACEHOLDER: AdaptionLabs Dashboard] -->
 > 📸 **(Here goes image: AdaptionLabs Platform Dashboard & Model Pipeline Configuration)**
+<!-- ![AdaptionLabs Dashboard](./docs/images/06_adaptionlabs_dashboard.png) -->
 
 <!-- [IMAGE PLACEHOLDER: AdaptionLabs Telemetry] -->
 > 📸 **(Here goes image: AdaptionLabs Real-time LLM Inference Telemetry & Token Latency)**
+<!-- ![AdaptionLabs Telemetry](./docs/images/07_adaptionlabs_telemetry.png) -->
 
 ---
 
@@ -406,6 +413,9 @@ fraudxai/
 │   │   └── types/
 │   │       └── index.ts              # TypeScript schemas & preset definitions
 │   └── package.json                  # Node.js dependencies
+│
+├── docs/
+│   └── images/                       # UI screenshots, metrics curves, and media assets
 │
 ├── LICENSE                           # MIT License
 └── README.md                         # Main project documentation
